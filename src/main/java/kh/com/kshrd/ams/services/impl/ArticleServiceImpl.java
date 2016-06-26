@@ -11,6 +11,7 @@ import kh.com.kshrd.ams.filtering.ArticleFilter;
 import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.repositories.ArticleRepository;
 import kh.com.kshrd.ams.services.ArticleService;
+import kh.com.kshrd.ams.utilities.Pagination;
 
 @Service
 public class ArticleServiceImpl implements ArticleService{
@@ -35,9 +36,9 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 
 	@Override
-	public List<Article> findAllArticles(ArticleFilter filter) throws BusinessException {
+	public List<Article> findAllArticles(ArticleFilter filter, Pagination pagination) throws BusinessException {
 		try {
-			return articleRepository.findAllArticles(filter);
+			return articleRepository.findAllArticles(filter, pagination);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new BusinessException();

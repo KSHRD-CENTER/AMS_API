@@ -5,6 +5,7 @@ import java.util.List;
 import kh.com.kshrd.ams.exceptions.BusinessException;
 import kh.com.kshrd.ams.filtering.ArticleFilter;
 import kh.com.kshrd.ams.models.Article;
+import kh.com.kshrd.ams.utilities.Pagination;
 
 public interface ArticleService {
 
@@ -18,7 +19,7 @@ public interface ArticleService {
 	public boolean deleteArticle(Long id) throws BusinessException;
 	
 	//TODO: TO GET ALL ARTICLES SERVICE
-	public List<Article> findAllArticles(ArticleFilter filter) throws BusinessException;
+	public List<Article> findAllArticles(ArticleFilter filter, Pagination pagination) throws BusinessException;
 	
 	//TODO: TO GET A ARTICLE BY ID
 	public Article findArticleById(Long id) throws BusinessException;

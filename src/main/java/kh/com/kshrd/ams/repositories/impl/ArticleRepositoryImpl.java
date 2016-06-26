@@ -13,6 +13,7 @@ import kh.com.kshrd.ams.filtering.ArticleFilter;
 import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.models.Category;
 import kh.com.kshrd.ams.repositories.ArticleRepository;
+import kh.com.kshrd.ams.utilities.Pagination;
 
 @Repository
 public class ArticleRepositoryImpl implements ArticleRepository{
@@ -36,7 +37,7 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 	}
 
 	@Override
-	public List<Article> findAllArticles(ArticleFilter fitler) throws SQLException {
+	public List<Article> findAllArticles(ArticleFilter fitler, Pagination pagination) throws SQLException {
 		String sql =  "SELECT A.id, "
 					+ "	A.title, "
 					+ " A.description, "
@@ -46,8 +47,13 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 					+ " A.category_id, "
 					+ " B.name AS category "
 					+ "FROM articles A "
-					+ "LEFT JOIN categories B ON A.category_id = B.id ";
-		return jdbcTemplate.query(sql, new RowMapper<Article>(){
+					+ "LEFT JOIN categories B ON A.category_id = B.id "
+					+ "WHERE A.status = '1 ' "
+					+ "LIMIT ? "
+					+ "OFFSET ? ";
+		return jdbcTemplate.query(sql,
+				new Object[]{pagination.getLimit(), pagination.offset()}, 
+				new RowMapper<Article>(){
 			@Override
 			public Article mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Article article = new Article();
@@ -79,7 +85,8 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 				+ " B.name AS category "
 				+ "FROM articles A "
 				+ "LEFT JOIN categories B ON A.category_id = B.id "
-				+ "WHERE A.id = ? ";
+				+ "WHERE A.id = ? "
+				+ "AND A.status = ''1' ";
 	return jdbcTemplate.queryForObject(sql,new Object[]{id}, new RowMapper<Article>(){
 		@Override
 		public Article mapRow(ResultSet rs, int rowNum) throws SQLException {

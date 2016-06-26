@@ -16,6 +16,7 @@ import kh.com.kshrd.ams.filtering.ArticleFilter;
 import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.models.ResponseModel;
 import kh.com.kshrd.ams.services.ArticleService;
+import kh.com.kshrd.ams.utilities.Pagination;
 
 @RestController
 @RequestMapping(value="/v1/api/articles")
@@ -27,12 +28,12 @@ public class RestArticleController {
 
 	@RequestMapping(method= RequestMethod.GET)
 	@ApiOperation("TODO: TO FIND ALL ARTICLES")
-	public ResponseModel<List<Article>> findAllArticles(ArticleFilter filter){
+	public ResponseModel<List<Article>> findAllArticles(ArticleFilter filter, Pagination pagination){
 		ResponseModel<List<Article>> responseModel = new ResponseModel<List<Article>>();
 		try {
 			responseModel.setCode("0000");
 			responseModel.setMessage("YOU HAVE BEEN FIND ALL ARTICLES SUCCESSFULLY.");
-			responseModel.setData(articleService.findAllArticles(filter));
+			responseModel.setData(articleService.findAllArticles(filter, pagination));
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import kh.com.kshrd.ams.filtering.ArticleFilter;
 import kh.com.kshrd.ams.models.Article;
+import kh.com.kshrd.ams.utilities.Pagination;
 
 public interface ArticleRepository {
 
@@ -18,7 +19,7 @@ public interface ArticleRepository {
 	public boolean deleteArticle(Long id) throws SQLException;
 	
 	//TODO: TO FIND ALL ARTICLES WITH FILTERING AND PAGINATION
-	public List<Article> findAllArticles(ArticleFilter fitler) throws SQLException;
+	public List<Article> findAllArticles(ArticleFilter fitler, Pagination pagination) throws SQLException;
 	
 	//TODO: TO FIND A ARTICLE BY ID
 	public Article findArticleById(Long id) throws SQLException;

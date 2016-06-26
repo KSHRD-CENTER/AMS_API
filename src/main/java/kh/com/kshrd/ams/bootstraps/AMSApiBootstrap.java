@@ -2,6 +2,7 @@ package kh.com.kshrd.ams.bootstraps;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import kh.com.kshrd.ams.configurations.MvcConfiguration;
 import kh.com.kshrd.ams.configurations.RootContextConfiguration;
 
 public class AMSApiBootstrap extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -13,8 +14,7 @@ public class AMSApiBootstrap extends AbstractAnnotationConfigDispatcherServletIn
   
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        //return new Class[] { MvcConfiguration.class };
-    	return null;
+        return new Class[] { MvcConfiguration.class };
     }
   
     @Override
