@@ -20,7 +20,7 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public List<Category> findAllArticles(CategoryFilter fitler) throws SQLException {
+	public List<Category> findAllCategories(CategoryFilter fitler) throws SQLException {
 		String sql =  "SELECT A.id, "
 					+ "	A.name, "
 					+ "	A.status, "
@@ -39,8 +39,32 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 			}
 		});
 
+	}
 
+	@Override
+	public Category findCategoryById(Long id) throws SQLException {
+		String sql =  "SELECT A.id, "
+				+ "	A.name, "
+				+ "	A.status, "
+				+ " B.name AS parent "
+			   + "FROM categories A "
+			   + "LEFT JOIN categories B ON A.parent_id = B.id "
+			   + "WHERE A.id = ?";
+		return jdbcTemplate.queryForObject(sql,
+				new Object[]{id},
+				new RowMapper<Category>(){
+			@Override
+			public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Category category = new Category();
+				category.setId(rs.getLong("id"));
+				category.setName(rs.getString("name"));
+				category.setStatus(rs.getString("status"));
+				return category;
+			}
+		});
 
 	}
+	
+	
 
 }

@@ -40,8 +40,18 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public List<Category> findAllCategories(CategoryFilter filter) throws BusinessException {
 		try {
-			return categoryRepository.findAllArticles(filter);
+			return categoryRepository.findAllCategories(filter);
 		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BusinessException();
+		}
+	}
+
+	@Override
+	public Category findCategoryById(Long id) throws BusinessException {
+		try{
+			return categoryRepository.findCategoryById(id);
+		}catch(SQLException e){
 			e.printStackTrace();
 			throw new BusinessException();
 		}

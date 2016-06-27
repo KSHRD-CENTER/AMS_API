@@ -13,7 +13,10 @@ import com.wordnik.swagger.annotations.ApiOperation;
 
 import kh.com.kshrd.ams.exceptions.BusinessException;
 import kh.com.kshrd.ams.filtering.ArticleFilter;
+import kh.com.kshrd.ams.forms.ArticleForm;
 import kh.com.kshrd.ams.models.Article;
+import kh.com.kshrd.ams.models.Category;
+import kh.com.kshrd.ams.models.Response;
 import kh.com.kshrd.ams.models.ResponseModel;
 import kh.com.kshrd.ams.services.ArticleService;
 import kh.com.kshrd.ams.utilities.Pagination;
@@ -53,4 +56,65 @@ public class RestArticleController {
 		}
 		return responseModel;
 	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	@ApiOperation("TODO: TO REGISTER A NEW ARTICLE")
+	public Response addNewArticle(ArticleForm form){
+		Response responseModel = new Response();
+		try {
+			responseModel.setCode("0000");
+			responseModel.setMessage("YOU HAVE BEEN ADD NEW ARTICLE SUCCESSFULLY.");
+			Article article = new Article();
+			article.setAuthor(form.getAuthor());
+			article.setTitle(form.getTitle());
+			article.setDescription(form.getDescription());
+			
+			Category category = new Category();
+			category.setId(form.getCategoryId());
+			
+			article.setCategory(category);
+			articleService.addNewArticle(article);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		return responseModel;
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
+	@ApiOperation("TODO: TO UPDATE A ARTICLE BY ID")
+	public Response deleteArticle(@PathVariable("id") Long id, ArticleForm form){
+		Response responseModel = new Response();
+		try {
+			Article article = new Article();
+			article.setAuthor(form.getAuthor());
+			article.setTitle(form.getTitle());
+			article.setDescription(form.getDescription());
+			
+			Category category = new Category();
+			category.setId(form.getCategoryId());
+			
+			article.setCategory(category);
+			articleService.updateArticle(article);
+			responseModel.setCode("0000");
+			responseModel.setMessage("YOU HAVE BEEN UPDATED THE ARTICLE SUCCESSFULLY.");
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		return responseModel;
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	@ApiOperation("TODO: TO DELETE A ARTICLE BY ID")
+	public Response deleteArticle(@PathVariable("id") Long id){
+		Response responseModel = new Response();
+		try {
+			articleService.deleteArticle(id);
+			responseModel.setCode("0000");
+			responseModel.setMessage("YOU HAVE BEEN DELETED THE ARTICLE SUCCESSFULLY.");
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		return responseModel;
+	}
+	
 }

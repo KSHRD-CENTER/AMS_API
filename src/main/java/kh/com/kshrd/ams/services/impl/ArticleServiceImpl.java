@@ -21,18 +21,32 @@ public class ArticleServiceImpl implements ArticleService{
 	
 	@Override
 	public boolean addNewArticle(Article article) throws BusinessException {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			return articleRepository.save(article);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BusinessException();
+		}
 	}
 
 	@Override
 	public boolean updateArticle(Article article) throws BusinessException {
-		return false;
+		try {
+			return articleRepository.updateArticle(article);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BusinessException();
+		}
 	}
 
 	@Override
 	public boolean deleteArticle(Long id) throws BusinessException {
-		return false;
+		try{
+			return articleRepository.deleteArticle(id);
+		}catch(SQLException e){
+			e.printStackTrace();
+			throw new BusinessException();
+		}
 	}
 
 	@Override
@@ -54,5 +68,4 @@ public class ArticleServiceImpl implements ArticleService{
 			throw new BusinessException();
 		}
 	}
-
 }

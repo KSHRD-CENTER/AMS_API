@@ -2,27 +2,11 @@ package kh.com.kshrd.ams.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ResponseModel<T> {
+public class ResponseModel<T> extends Response {
 
-	@JsonProperty("CODE")
-	public String code;
-	@JsonProperty("MESSAGE")
-	public String message;
 	@JsonProperty("DATA")
 	public T data;
 	
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
 	public T getData() {
 		return data;
 	}

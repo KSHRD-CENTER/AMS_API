@@ -9,5 +9,7 @@ import kh.com.kshrd.ams.models.Category;
 public interface CategoryRepository {
 
 	//TODO: TO FIND ALL CATEGORY WITH FILTERING AND PAGINATION
-	public List<Category> findAllArticles(CategoryFilter fitler) throws SQLException;
+	public List<Category> findAllCategories(CategoryFilter fitler) throws SQLException;
+	
+	public Category findCategoryById(Long id) throws SQLException;
 }

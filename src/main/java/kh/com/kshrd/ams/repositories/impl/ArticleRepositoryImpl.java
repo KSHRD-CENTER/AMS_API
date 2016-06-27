@@ -23,6 +23,26 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 	
 	@Override
 	public boolean save(Article article) throws SQLException {
+		Long id = jdbcTemplate.queryForObject("SELECT nextval('articles_id_seq')",Long.class);
+		int result = jdbcTemplate.update("INSERT INTO articles(id, "
+										 + "title, "
+				 						 + "description, "
+				 						 + "created_date, "
+				 						 + "author, "
+				 						 + "status, "
+				 						 + "category_id) "
+						 + "VALUES(?, ?, ?, TO_CHAR(NOW(),'YYYYMMDDHH24MISS'), ?, '1', ?)"
+						 , new Object[]{
+								 		id,
+								 		article.getTitle(),
+								 		article.getDescription(),
+								 		article.getAuthor(),
+								 		article.getCategory().getId()
+						 				});
+		if(result>0){
+			System.out.println(id);
+			return true;
+		}
 		return false;
 	}
 
@@ -76,37 +96,35 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 	@Override
 	public Article findArticleById(Long id) throws SQLException {
 		String sql =  "SELECT A.id, "
-				+ "	A.title, "
-				+ " A.description, "
-				+ " A.created_date, "
-				+ " A.status, "
-				+ " A.author, "
-				+ " A.category_id, "
-				+ " B.name AS category "
-				+ "FROM articles A "
-				+ "LEFT JOIN categories B ON A.category_id = B.id "
-				+ "WHERE A.id = ? "
-				+ "AND A.status = ''1' ";
-	return jdbcTemplate.queryForObject(sql,new Object[]{id}, new RowMapper<Article>(){
-		@Override
-		public Article mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Article article = new Article();
-			article.setId(rs.getLong("id"));
-			article.setTitle(rs.getString("title"));
-			article.setDescription(rs.getString("description"));
-			article.setCreatedDate(rs.getString("created_date"));
-			article.setStatus(rs.getString("status"));
-			article.setAuthor(rs.getString("author"));
-			
-			Category category = new Category();
-			category.setId(rs.getLong("category_id"));
-			category.setName(rs.getString("category"));
-			article.setCategory(category);
-			return article;
-		}
-	});
+					+ "	A.title, "
+					+ " A.description, "
+					+ " A.created_date, "
+					+ " A.status, "
+					+ " A.author, "
+					+ " A.category_id, "
+					+ " B.name AS category "
+					+ "FROM articles A "
+					+ "LEFT JOIN categories B ON A.category_id = B.id "
+					+ "WHERE A.id = ? "
+					+ "AND A.status = ''1' ";
+		return jdbcTemplate.queryForObject(sql,new Object[]{id}, new RowMapper<Article>(){
+			@Override
+			public Article mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Article article = new Article();
+				article.setId(rs.getLong("id"));
+				article.setTitle(rs.getString("title"));
+				article.setDescription(rs.getString("description"));
+				article.setCreatedDate(rs.getString("created_date"));
+				article.setStatus(rs.getString("status"));
+				article.setAuthor(rs.getString("author"));
+				
+				Category category = new Category();
+				category.setId(rs.getLong("category_id"));
+				category.setName(rs.getString("category"));
+				article.setCategory(category);
+				return article;
+			}
+		});
 	}
 	
-	
-
 }

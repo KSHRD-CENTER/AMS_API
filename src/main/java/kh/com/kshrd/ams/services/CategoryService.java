@@ -20,4 +20,7 @@ public interface CategoryService {
 	
 	//TODO: TO GET ALL CATEGORY SERVICE
 	public List<Category> findAllCategories(CategoryFilter filter) throws BusinessException;
+	
+	//TODO: TO GET A CATEGORY BY ID SERVICE
+	public Category findCategoryById(Long id) throws BusinessException;
 }
