@@ -14,25 +14,27 @@ import kh.com.kshrd.ams.services.ArticleService;
 import kh.com.kshrd.ams.utilities.Pagination;
 
 @Service
-public class ArticleServiceImpl implements ArticleService{
+public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
 	private ArticleRepository articleRepository;
-	
+
 	@Override
-	public boolean addNewArticle(Article article) throws BusinessException {
+	public long addNewArticle(Article article) throws BusinessException {
+		long id = 0;
 		try {
-			return articleRepository.save(article);
+			id = articleRepository.save(article);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new BusinessException();
 		}
+		return id;
 	}
 
 	@Override
 	public boolean updateArticle(Article article) throws BusinessException {
 		try {
-			return articleRepository.updateArticle(article);
+			return articleRepository.update(article);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new BusinessException();
@@ -41,9 +43,9 @@ public class ArticleServiceImpl implements ArticleService{
 
 	@Override
 	public boolean deleteArticle(Long id) throws BusinessException {
-		try{
-			return articleRepository.deleteArticle(id);
-		}catch(SQLException e){
+		try {
+			return articleRepository.delete(id);
+		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new BusinessException();
 		}
@@ -52,7 +54,7 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public List<Article> findAllArticles(ArticleFilter filter, Pagination pagination) throws BusinessException {
 		try {
-			return articleRepository.findAllArticles(filter, pagination);
+			return articleRepository.findAll(filter, pagination);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new BusinessException();
@@ -62,7 +64,7 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public Article findArticleById(Long id) throws BusinessException {
 		try {
-			return articleRepository.findArticleById(id);
+			return articleRepository.findOne(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new BusinessException();

@@ -10,7 +10,7 @@ import kh.com.kshrd.ams.utilities.Pagination;
 public interface ArticleService {
 
 	//TODO: TO ADD NEW ARTICLE SERVICE
-	public boolean addNewArticle(Article article) throws BusinessException;
+	public long addNewArticle(Article article) throws BusinessException;
 	
 	//TODO: TO UPDATE ARTICLE SERVICE
 	public boolean updateArticle(Article article) throws BusinessException;
