@@ -16,6 +16,13 @@ public class Response {
 		this.code = code;
 	}
 	public String getMessage() {
+		if("".equals(this.message)){
+			if("0000".equals(this.code)){
+				this.message = "SUCCESSFULLY.";
+			}else if("9999".equals(this.code)){
+				this.message = "FAILURE.";
+			}			
+		}
 		return message;
 	}
 	public void setMessage(String message) {
