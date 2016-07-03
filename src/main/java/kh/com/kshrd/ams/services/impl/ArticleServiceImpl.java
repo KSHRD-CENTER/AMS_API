@@ -68,4 +68,15 @@ public class ArticleServiceImpl implements ArticleService {
 			throw new BusinessException();
 		}
 	}
+
+	@Override
+	public List<Article> findAllArticlesByCategoryId(Long categoryId, Pagination pagination) throws BusinessException {
+		try {
+			return articleRepository.findAllByCategoryId(categoryId, pagination);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BusinessException();
+		}
+	}
+
 }

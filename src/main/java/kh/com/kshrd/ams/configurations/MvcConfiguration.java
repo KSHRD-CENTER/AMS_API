@@ -87,10 +87,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		dataSource.setDriverClassName(environment.getProperty("AMSAPI.datasource.driver"));
 		dataSource.setUsername(environment.getProperty("AMSAPI.datasource.username"));
 		dataSource.setPassword(environment.getProperty("AMSAPI.datasource.password"));
-		dataSource.setMaximumPoolSize(20000000);
-		dataSource.setMaxLifetime(200000000);
-		dataSource.setIdleTimeout(30000000);
-		dataSource.setMinimumIdle(30000000);
+		dataSource.setMaximumPoolSize(200);
+		dataSource.setMaxLifetime(200);
+		dataSource.setIdleTimeout(300);
+		dataSource.setMinimumIdle(3);
 		dataSource.setPoolName("SpringMVCHikariCP");
 		return dataSource;
 	}

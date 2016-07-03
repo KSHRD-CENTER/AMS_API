@@ -20,10 +20,10 @@ public interface BaseRepository<T, ID, FILTER> {
 	public List<T> findAll(Pagination pagination) throws SQLException;
 	
 	//TODO: TO FIND ALL ARTICLES WITH FILTERING
-	public List<T> findAll(FILTER fitler) throws SQLException;
+	public List<T> findAll(FILTER filter) throws SQLException;
 	
 	//TODO: TO FIND ALL ARTICLES WITH FILTERING AND PAGINATION
-	public List<T> findAll(FILTER fitler, Pagination pagination) throws SQLException;
+	public List<T> findAll(FILTER filter, Pagination pagination) throws SQLException;
 	
 	//TODO: TO FIND ALL ARTICLES
 	public List<T> findAll() throws SQLException;
@@ -32,5 +32,7 @@ public interface BaseRepository<T, ID, FILTER> {
 	public T findOne(ID id) throws SQLException;
 	
 	public ID count() throws SQLException;
+	
+	public ID count(FILTER filter) throws SQLException;
 
 }

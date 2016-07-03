@@ -17,23 +17,23 @@ public class Pagination implements Serializable {
 	private int limit;
 
 	@JsonProperty("TOTAL_COUNT")
-	private int totalCount;
+	private Long totalCount;
 
 	@JsonProperty("TOTAL_PAGES")
 	private int totalPages;
 
 	public Pagination() {
-		this(1, 15, 0, 0);
+		this(1, 15, 0L, 0);
 	}
 
 	public Pagination(int page, int limit) {
 		this.page = page;
 		this.limit = limit;
-		this.totalCount = 0;
+		this.totalCount = 0L;
 		this.totalPages = 0;
 	}
 
-	public Pagination(int page, int limit, int totalCount, int totalPages) {
+	public Pagination(int page, int limit, Long totalCount, int totalPages) {
 		this.page = page;
 		this.limit = limit;
 		this.totalCount = totalCount;
@@ -81,17 +81,13 @@ public class Pagination implements Serializable {
 		this.limit = limit;
 	}
 
-	public int getTotalCount() {
+	public Long getTotalCount() {
 		return totalCount;
 	}
 
-	public void setTotalCount(int totalCount) {
+	public void setTotalCount(Long totalCount) {
 		this.totalCount = totalCount;
 		this.totalPages = totalPages();
-		if (this.totalPages() < this.page) {
-			throw new CustomGenericException("7777",
-					"THE TOTAL PAGES HAS ONLY " + this.totalPages() + " AND YOUR CURRENT PAGE IS " + this.page);
-		}
 	}
 
 	public int getTotalPages() {

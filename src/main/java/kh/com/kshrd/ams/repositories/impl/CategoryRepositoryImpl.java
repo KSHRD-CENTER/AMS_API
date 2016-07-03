@@ -133,7 +133,11 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
+	@Override
+	public Long count(CategoryFilter filter) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

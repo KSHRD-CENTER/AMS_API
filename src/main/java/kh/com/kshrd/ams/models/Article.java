@@ -25,6 +25,9 @@ public class Article {
 	@JsonProperty("CATEGORY")
 	private Category category;
 	
+	@JsonProperty("IMAGE")
+	private String image;
+	
 	public Long getId() {
 		return id;
 	}
@@ -67,10 +70,18 @@ public class Article {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", createdDate="
-				+ createdDate + ", author=" + author + ", status=" + status + ", category=" + category + "]";
+				+ createdDate + ", author=" + author + ", status=" + status + ", category=" + category + ", image="
+				+ image + "]";
 	}
+	
 	
 }

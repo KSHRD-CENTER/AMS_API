@@ -23,4 +23,6 @@ public interface ArticleService {
 	
 	//TODO: TO GET A ARTICLE BY ID
 	public Article findArticleById(Long id) throws BusinessException;
+	
+	public List<Article> findAllArticlesByCategoryId(Long categoryId, Pagination pagination) throws BusinessException;
 }
