@@ -42,7 +42,7 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "kh.com.kshrd.ams.restcontrollers"})
+@ComponentScan(basePackages = { "kh.com.kshrd.ams.restcontrollers" })
 @PropertySource("classpath:application.properties")
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
@@ -51,10 +51,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/")
-				.resourceChain(true).addResolver(new GzipResourceResolver());
-		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/")
-				.resourceChain(true).addResolver(new GzipResourceResolver());
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").resourceChain(true)
 				.addResolver(new GzipResourceResolver());
 		registry.addResourceHandler("/images/**")
@@ -63,6 +59,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/image-thumbnails/**")
 				.addResourceLocations("file:/opt/resources/image-thumbnails/").resourceChain(true)
 				.addResolver(new GzipResourceResolver());
+
+		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 
 	}
 
@@ -87,10 +87,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		dataSource.setDriverClassName(environment.getProperty("AMSAPI.datasource.driver"));
 		dataSource.setUsername(environment.getProperty("AMSAPI.datasource.username"));
 		dataSource.setPassword(environment.getProperty("AMSAPI.datasource.password"));
-		dataSource.setMaximumPoolSize(2000);
-		dataSource.setMaxLifetime(2000000);
-		dataSource.setIdleTimeout(30000);
-		dataSource.setMinimumIdle(3);
+		dataSource.setMaximumPoolSize(20000000);
+		dataSource.setMaxLifetime(200000000);
+		dataSource.setIdleTimeout(30000000);
+		dataSource.setMinimumIdle(30000000);
 		dataSource.setPoolName("SpringMVCHikariCP");
 		return dataSource;
 	}

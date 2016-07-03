@@ -17,7 +17,7 @@ import kh.com.kshrd.ams.models.ResponseModel;
 import kh.com.kshrd.ams.services.CategoryService;
 
 @RestController
-@RequestMapping(value="/api/v1/categories")
+@RequestMapping(value="/v1/api/categories")
 @Api("CATEGORY MANAGEMENT API")
 public class RestCategoryController {
 	

@@ -17,7 +17,7 @@ public class Article {
 	private String createdDate;
 	
 	@JsonProperty("AUTHOR")
-	private User user;
+	private User author;
 	
 	@JsonProperty("STATUS")
 	private String status;
@@ -50,10 +50,10 @@ public class Article {
 		this.createdDate = createdDate;
 	}
 	public User getAuthor() {
-		return user;
+		return author;
 	}
-	public void setAuthor(User user) {
-		this.user = user;
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 	public String getStatus() {
 		return status;
@@ -70,7 +70,7 @@ public class Article {
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", createdDate="
-				+ createdDate + ", author=" + user + ", status=" + status + ", category=" + category + "]";
+				+ createdDate + ", author=" + author + ", status=" + status + ", category=" + category + "]";
 	}
 	
 }

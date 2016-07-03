@@ -20,19 +20,17 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleRepository articleRepository;
 
 	@Override
-	public long addNewArticle(Article article) throws BusinessException {
-		long id = 0;
+	public Article addNewArticle(Article article) throws BusinessException {
 		try {
-			id = articleRepository.save(article);
+			return articleRepository.save(article);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new BusinessException();
 		}
-		return id;
 	}
 
 	@Override
-	public boolean updateArticle(Article article) throws BusinessException {
+	public Article updateArticle(Article article) throws BusinessException {
 		try {
 			return articleRepository.update(article);
 		} catch (SQLException e) {

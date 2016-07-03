@@ -13,11 +13,12 @@ import kh.com.kshrd.ams.filtering.ArticleFilter;
 import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.models.Category;
 import kh.com.kshrd.ams.models.User;
+import kh.com.kshrd.ams.repositories.ArticleRepository;
 import kh.com.kshrd.ams.repositories.BaseRepository;
 import kh.com.kshrd.ams.utilities.Pagination;
 
 @Repository
-public class ArticleRepositoryImpl implements BaseRepository<Article, Long, ArticleFilter>{
+public class ArticleRepositoryImpl implements ArticleRepository{
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -49,8 +50,12 @@ public class ArticleRepositoryImpl implements BaseRepository<Article, Long, Arti
 
 	@Override
 	public Article update(Article article) throws SQLException {
+		System.out.println("ARTICLE UPDATED ==> " + article);
 		String sql = "UPDATE articles "
-				   + "SET title = ?, description = ?, user_id = ?, category_id = ? "
+				   + "SET title = ? "
+				   + "	, description = ? "
+				   + "	, user_id = ? "
+				   + "	, category_id = ? "
 				   + "WHERE id = ?";
 		int result = jdbcTemplate.update(sql, 
 					new Object[] {
@@ -68,7 +73,8 @@ public class ArticleRepositoryImpl implements BaseRepository<Article, Long, Arti
 
 	@Override
 	public boolean delete(Long id) throws SQLException {
-		String sql = "DELETE FROM articles "
+		String sql = "UPDATE articles "
+				   + "SET status = '0' "
 				   + "WHERE id = ?";
 		int result = jdbcTemplate.update(sql, new Object[] { id });
 		if (result > 0) {

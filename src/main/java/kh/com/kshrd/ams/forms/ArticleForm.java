@@ -11,7 +11,7 @@ public class ArticleForm {
 	@JsonProperty("CREATED_DATE")
 	private String createdDate;
 	@JsonProperty("AUTHOR")
-	private String author;
+	private Long author;
 	@JsonProperty("CATEGORY_ID")
 	private Long categoryId;
 	@JsonProperty("STATUS")
@@ -35,10 +35,10 @@ public class ArticleForm {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
-	public String getAuthor() {
+	public Long getAuthor() {
 		return author;
 	}
-	public void setAuthor(String author) {
+	public void setAuthor(Long author) {
 		this.author = author;
 	}
 	public Long getCategoryId() {

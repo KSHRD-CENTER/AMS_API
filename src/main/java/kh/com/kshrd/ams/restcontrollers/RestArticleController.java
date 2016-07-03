@@ -1,9 +1,12 @@
 package kh.com.kshrd.ams.restcontrollers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +21,7 @@ import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.models.Category;
 import kh.com.kshrd.ams.models.Response;
 import kh.com.kshrd.ams.models.ResponseModel;
+import kh.com.kshrd.ams.models.User;
 import kh.com.kshrd.ams.services.ArticleService;
 import kh.com.kshrd.ams.utilities.Pagination;
 
@@ -59,13 +63,15 @@ public class RestArticleController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@ApiOperation("TODO: TO REGISTER A NEW ARTICLE")
-	public Response addNewArticle(ArticleForm form){
+	public Response addNewArticle(@RequestBody ArticleForm form){
 		Response responseModel = new Response();
 		try {
 			responseModel.setCode("0000");
 			responseModel.setMessage("YOU HAVE BEEN ADD NEW ARTICLE SUCCESSFULLY.");
 			Article article = new Article();
-			article.setAuthor(form.getAuthor());
+			User user = new User();
+			user.setId(form.getAuthor());
+			article.setAuthor(user);
 			article.setTitle(form.getTitle());
 			article.setDescription(form.getDescription());
 			
@@ -82,11 +88,14 @@ public class RestArticleController {
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
 	@ApiOperation("TODO: TO UPDATE A ARTICLE BY ID")
-	public Response deleteArticle(@PathVariable("id") Long id, ArticleForm form){
+	public Response deleteArticle(@PathVariable("id") Long id, @RequestBody ArticleForm form){
 		Response responseModel = new Response();
 		try {
 			Article article = new Article();
-			article.setAuthor(form.getAuthor());
+			article.setId(id);
+			User user = new User();
+			user.setId(form.getAuthor());
+			article.setAuthor(user);
 			article.setTitle(form.getTitle());
 			article.setDescription(form.getDescription());
 			

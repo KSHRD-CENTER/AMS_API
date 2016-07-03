@@ -14,7 +14,8 @@ public class AMSApiBootstrap extends AbstractAnnotationConfigDispatcherServletIn
   
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] { MvcConfiguration.class };
+        //return new Class[] { MvcConfiguration.class };
+    	return null;
     }
   
     @Override
