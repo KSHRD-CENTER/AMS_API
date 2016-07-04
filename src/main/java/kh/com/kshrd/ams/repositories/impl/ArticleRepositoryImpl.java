@@ -273,7 +273,7 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 		String sql =  "SELECT COUNT(A.id) "
 					+ "FROM articles A "
 					+ "WHERE A.status = '1' "
-					+ "A.category_id = ?";
+					+ "AND A.category_id = ?";
 		return jdbcTemplate.queryForObject(
 				sql,
 				new Object[]{
