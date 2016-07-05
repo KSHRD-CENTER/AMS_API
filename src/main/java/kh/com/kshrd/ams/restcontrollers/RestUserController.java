@@ -47,7 +47,7 @@ public class RestUserController {
 			user.setEmail(form.getEmail());
 			user.setName(form.getName());
 			user.setPassword(form.getPassword());
-			user.setPhoto(uploadService.uploadMultipart(form.getPhoto(), request));
+			//user.setPhoto(uploadService.uploadMultipart(form.getPhoto(), request));
 			user.setGender(form.getGender());
 			user.setImageUrl(uploadService.uploadMultipart(form.getPhoto(), request));
 			
@@ -74,6 +74,8 @@ public class RestUserController {
 			response.setCode("0000");
 			response.setMessage("YOU HAVE BEEN SIGNED IN SUCCESSFULLY.");
 			User user = new User();
+			user.setEmail(form.getEmail());
+			user.setPassword(form.getPassword());
 			response.setData(userService.signUp(user));
 		}catch(Exception ex){
 			ex.printStackTrace();

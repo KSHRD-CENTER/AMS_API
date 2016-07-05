@@ -24,19 +24,22 @@ public class UserRepositoryImpl implements UserRepository{
 		int result = jdbcTemplate.update("INSERT INTO users("
 										 + "id, "
 										 + "name, "
+										 + "password, "
+										 + "email, "
 				 						 + "gender, "
 				 						 + "telephone, "
 				 						 + "status, "
 				 						 + "image_url) "
-						 + "VALUES(?, ?, ?, ?, '1', ?)"
+						 + "VALUES(?, ?, ?, ?, ?, '1', ?)"
 						 , new Object[]{
-								 		id,
-								 		user.getName(),
-								 		user.getGender(),
-								 		user.getTelephone(),
-								 		"1",
-								 		user.getImageUrl()
-						 				});
+						 		id,
+						 		user.getName(),
+						 		user.getPassword(),
+						 		user.getEmail(),
+						 		user.getGender(),
+						 		user.getTelephone(),
+						 		user.getImageUrl()
+				 	});
 		if (result > 0) {
 			System.out.println(id);
 			return this.findOne(id);
@@ -48,6 +51,7 @@ public class UserRepositoryImpl implements UserRepository{
 	public User findOne(Long id) {
 		String sql =  "SELECT id, "
 				+ "	name, "
+				+ " password, "
 				+ " gender, "
 				+ " telephone, "
 				+ " status "
@@ -63,6 +67,8 @@ public class UserRepositoryImpl implements UserRepository{
 					User user = new User();
 					user.setId(rs.getLong("id"));
 					user.setName(rs.getString("name"));
+					user.setPassword(rs.getString("password"));
+					user.setEmail(rs.getString("email"));
 					user.setGender(rs.getString("gender"));
 					user.setTelephone(rs.getString("telephone"));
 					user.setStatus(rs.getString("status"));
@@ -76,6 +82,7 @@ public class UserRepositoryImpl implements UserRepository{
 	public List<User> findAll() {
 		String sql =  "SELECT id, "
 					+ "	name, "
+					+ " email, "
 					+ " gender, "
 					+ " telephone, "
 					+ " status "
@@ -89,6 +96,7 @@ public class UserRepositoryImpl implements UserRepository{
 						User user = new User();
 						user.setId(rs.getLong("id"));
 						user.setName(rs.getString("name"));
+						user.setEmail(rs.getString("email"));
 						user.setGender(rs.getString("gender"));
 						user.setTelephone(rs.getString("telephone"));
 						user.setStatus(rs.getString("status"));
@@ -133,7 +141,33 @@ public class UserRepositoryImpl implements UserRepository{
 		}
 		return false;
 	}
-	
-	
 
+	@Override
+	public User signIn(User user) {
+		String sql =  "SELECT * "
+				+ "FROM users "
+				+ "WHERE status = '1' AND email = ?";
+		
+		return jdbcTemplate.queryForObject(sql, 
+				new Object[]{
+						user.getEmail(),
+				},
+				new RowMapper<User>(){
+					@Override
+					public User mapRow(ResultSet rs, int arg1) throws SQLException {
+						// TODO Auto-generated method stub
+						User user = new User();
+						user.setId(rs.getLong("id"));
+						user.setName(rs.getString("name"));
+						user.setPassword(rs.getString("password"));
+						user.setEmail(rs.getString("email"));
+						user.setGender(rs.getString("gender"));
+						user.setTelephone(rs.getString("telephone"));
+						user.setStatus(rs.getString("status"));
+						return user;
+					};
+		
+		});
+	
+	}
 }
