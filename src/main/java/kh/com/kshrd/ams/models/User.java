@@ -23,6 +23,8 @@ public class User {
 	private String facebookId;
 	@JsonIgnore
 	private String password;
+	@JsonProperty("IMAGE_URL")
+	private String imageUrl;
 
 	public Long getId() {
 		return id;
@@ -95,12 +97,22 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", gender=" + gender + ", telephone="
 				+ telephone + ", status=" + status + ", photo=" + photo + ", facebookId=" + facebookId + ", password="
-				+ password + "]";
+				+ password + ", imageUrl=" + imageUrl + "]";
 	}
+
+	
 
 }

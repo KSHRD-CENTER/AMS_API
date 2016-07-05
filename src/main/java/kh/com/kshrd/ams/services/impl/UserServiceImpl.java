@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kh.com.kshrd.ams.models.User;
+import kh.com.kshrd.ams.services.UploadService;
 import kh.com.kshrd.ams.services.UserService;
 
 @Service

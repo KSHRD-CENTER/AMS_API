@@ -1,5 +1,7 @@
 package kh.com.kshrd.ams.restcontrollers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +25,7 @@ import kh.com.kshrd.ams.models.ResponseList;
 import kh.com.kshrd.ams.models.ResponseRecord;
 import kh.com.kshrd.ams.models.User;
 import kh.com.kshrd.ams.services.ArticleService;
+import kh.com.kshrd.ams.services.UploadService;
 import kh.com.kshrd.ams.utilities.Pagination;
 
 @RestController
@@ -32,6 +35,9 @@ public class RestArticleController {
 	
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private UploadService uploadService;
 
 	@RequestMapping(method= RequestMethod.GET)
 	@ApiOperation("TODO: TO FIND ALL ARTICLES")
@@ -73,7 +79,7 @@ public class RestArticleController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@ApiOperation("TODO: TO REGISTER A NEW ARTICLE")
-	public Response addNewArticle(@RequestBody ArticleForm.InsertArticleForm form){
+	public Response addNewArticle(@RequestBody ArticleForm.InsertArticleForm form, HttpServletRequest request){
 		Response responseModel = new Response();
 		try {
 			responseModel.setCode("0000");
@@ -84,7 +90,7 @@ public class RestArticleController {
 			article.setAuthor(user);
 			article.setTitle(form.getTitle());
 			article.setDescription(form.getDescription());
-			article.setImage(form.getImage());
+			article.setImage(uploadService.uploadMultipart(form.getImage(), request));
 			
 			Category category = new Category();
 			category.setId(form.getCategoryId());
@@ -99,7 +105,7 @@ public class RestArticleController {
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
 	@ApiOperation("TODO: TO UPDATE A ARTICLE BY ID")
-	public Response deleteArticle(@PathVariable("id") Long id, @RequestBody ArticleForm.UpdateArticleForm form){
+	public Response deleteArticle(@PathVariable("id") Long id, @RequestBody ArticleForm.UpdateArticleForm form, HttpServletRequest request ){
 		Response responseModel = new Response();
 		try {
 			Article article = new Article();
@@ -109,7 +115,7 @@ public class RestArticleController {
 			article.setAuthor(user);
 			article.setTitle(form.getTitle());
 			article.setDescription(form.getDescription());
-			article.setImage(form.getImage());
+			article.setImage(uploadService.uploadMultipart(form.getImage(), request));
 			
 			Category category = new Category();
 			category.setId(form.getCategoryId());

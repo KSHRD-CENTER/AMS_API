@@ -49,6 +49,7 @@ public class RestUserController {
 			user.setPassword(form.getPassword());
 			user.setPhoto(uploadService.uploadMultipart(form.getPhoto(), request));
 			user.setGender(form.getGender());
+			user.setImageUrl(uploadService.uploadMultipart(form.getPhoto(), request));
 			
 			user = userService.signUp(user);
 			if(user!=null){

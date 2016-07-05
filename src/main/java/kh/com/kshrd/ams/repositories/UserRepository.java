@@ -10,8 +10,12 @@ public interface UserRepository {
 	public User save(User user);
 	
 	//TODO: TO SIGN IN USER
-	public User findOne(User user);
+	public User findOne(Long id);
 	
 	//TODO: TO FIND ALL USERS
 	public List<User> findAll();
+	
+	public User update(User user);
+	
+	public boolean delete(int id);
 }
