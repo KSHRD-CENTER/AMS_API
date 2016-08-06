@@ -51,6 +51,7 @@ public class RestCategoryController {
 			response.setCode("0000");
 			response.setMessage("YOU HAVE BEEN FIND ALL CATEGORIES SUCCESSFULLY.");
 			response.setData(articleService.findAllArticlesByCategoryId(id, pagination));
+			response.setPagination(pagination);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
