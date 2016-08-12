@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>RESTAURANT APPLICATION API</title>
+  <title>ARTICLE MANAGEMENT SYSTEM API</title>
   <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/dist/images/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/dist/images/favicon-16x16.png" sizes="16x16" />
   <link href='${pageContext.request.contextPath}/resources/dist/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
@@ -105,7 +105,7 @@
 <body class="swagger-section">
 	<div id='header'>
 	  <div class="swagger-ui-wrap">
-	    <a id="logo" href="http://khmeracademy.org">RESTAURANT APPLICATION API</a>
+	    <a id="logo" href="http://khmeracademy.org">ARTICLE MANAGEMENT SYSTEM API</a>
 	    <form id='api_selector'>
 	      <div class='input'><input placeholder="${pageContext.request.contextPath}/api-docs" value="${pageContext.request.contextPath}/api-docs" id="input_baseUrl" name="baseUrl" type="hidden"/></div>
 	      <div class='input'><input placeholder="api_key" value="Basic QU1TQVBJQURNSU46QU1TQVBJUEBTU1dPUkQ=" id="input_apiKey" name="apiKey" type="text"/></div>

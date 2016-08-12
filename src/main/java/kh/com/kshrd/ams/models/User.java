@@ -17,8 +17,6 @@ public class User {
 	private String telephone;
 	@JsonProperty("STATUS")
 	private String status;
-	@JsonProperty("PHOTO")
-	private String photo;
 	@JsonProperty("FACEBOOK_ID")
 	private String facebookId;
 	@JsonIgnore
@@ -66,14 +64,6 @@ public class User {
 		this.status = status;
 	}
 
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
 	public String getFacebookId() {
 		return facebookId;
 	}
@@ -109,7 +99,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", gender=" + gender + ", telephone="
-				+ telephone + ", status=" + status + ", photo=" + photo + ", facebookId=" + facebookId + ", password="
+				+ telephone + ", status=" + status + ", facebookId=" + facebookId + ", password="
 				+ password + ", imageUrl=" + imageUrl + "]";
 	}
 

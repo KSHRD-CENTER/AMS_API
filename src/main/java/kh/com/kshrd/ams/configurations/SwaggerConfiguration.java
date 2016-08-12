@@ -33,9 +33,9 @@ public class SwaggerConfiguration {
 
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfo(
-                "RESTAURANT APPLICATION API" ,
+                "ARTICLE MANAGEMENT SYSTEM API" ,
                 "API KEY : PLEASE CONTACT US TO GET THE API KEY...",
-                "RESTAURANT APPLICATION API",
+                "ARTICLE MANAGEMENT SYSTEM  API",
                 "info.kshrd@gmail.com",
                 "API License",
                 "http://www.kshrd.com.kh"

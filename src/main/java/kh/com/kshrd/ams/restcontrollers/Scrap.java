@@ -1,4 +1,4 @@
-package kh.com.kshrd.ams.restcontrollers;
+/*package kh.com.kshrd.ams.restcontrollers;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -51,3 +51,4 @@ public class Scrap {
 	}
 	
 }
+*/

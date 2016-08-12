@@ -29,8 +29,9 @@ public class UserRepositoryImpl implements UserRepository{
 				 						 + "gender, "
 				 						 + "telephone, "
 				 						 + "status, "
-				 						 + "image_url) "
-						 + "VALUES(?, ?, ?, ?, ?, '1', ?)"
+				 						 + "image_url, "
+				 						 + "facebook_id) "
+						 + "VALUES(?, ?, ?, ?, ?, ?, '1', ?, ?)"
 						 , new Object[]{
 						 		id,
 						 		user.getName(),
@@ -38,7 +39,8 @@ public class UserRepositoryImpl implements UserRepository{
 						 		user.getEmail(),
 						 		user.getGender(),
 						 		user.getTelephone(),
-						 		user.getImageUrl()
+						 		user.getImageUrl(),
+						 		user.getFacebookId()
 				 	});
 		if (result > 0) {
 			System.out.println(id);
@@ -50,14 +52,17 @@ public class UserRepositoryImpl implements UserRepository{
 	@Override
 	public User findOne(Long id) {
 		String sql =  "SELECT id, "
-				+ "	name, "
-				+ " password, "
-				+ " gender, "
-				+ " telephone, "
-				+ " status "
-				+ "FROM users "
-				+ "WHERE status = '1' "
-				+ "AND id = ?";
+					+ "	name, "
+					+ " password, "
+					+ " gender, "
+					+ " email, "
+					+ " telephone, "
+					+ " status, "
+					+ " image_url, "
+					+ " facebook_id "
+					+ "FROM users "
+					+ "WHERE status = '1' "
+					+ "AND id = ?";
 
 	return jdbcTemplate.queryForObject(sql,
 			new Object[]{id},
@@ -73,6 +78,7 @@ public class UserRepositoryImpl implements UserRepository{
 					user.setTelephone(rs.getString("telephone"));
 					user.setStatus(rs.getString("status"));
 					user.setImageUrl(rs.getString("image_url"));
+					user.setFacebookId(rs.getString("facebook_id"));
 					return user;
 				}
 		});
@@ -82,10 +88,13 @@ public class UserRepositoryImpl implements UserRepository{
 	public List<User> findAll() {
 		String sql =  "SELECT id, "
 					+ "	name, "
-					+ " email, "
+					+ " password, "
 					+ " gender, "
+					+ " email, "
 					+ " telephone, "
-					+ " status "
+					+ " status, "
+					+ " image_url, "
+					+ " facebook_id "
 					+ "FROM users "
 					+ "WHERE status = '1' ";
 	
@@ -101,6 +110,7 @@ public class UserRepositoryImpl implements UserRepository{
 						user.setTelephone(rs.getString("telephone"));
 						user.setStatus(rs.getString("status"));
 						user.setImageUrl(rs.getString("image_url"));
+						user.setFacebookId(rs.getString("facebook_id"));
 						return user;
 					}
 		});

@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mangofactory.swagger.annotations.ApiIgnore;
 import com.wordnik.swagger.annotations.Api;
@@ -40,16 +42,25 @@ public class RestUserController {
 	
 	@ApiOperation("TODO: TO SIGN UP A NEW USER")
 	@RequestMapping(value="/v1/api/users", method = RequestMethod.POST)
-	public ResponseRecord<User> signup(@RequestBody UserForm.SignupForm form, HttpServletRequest request){
+	public ResponseRecord<User> signup(
+			@RequestParam("EMAIL") String email,
+			@RequestParam("NAME") String name,
+			@RequestParam("PASSWORD") String password,
+			@RequestParam("GENDER") String gender,
+			@RequestParam("TELEPHONE") String telephone,
+			@RequestParam("FACEBOOK_ID") String facebookId,
+			@RequestParam("PHOTO") CommonsMultipartFile file, 
+			HttpServletRequest request){
 		ResponseRecord<User> responseModel = new ResponseRecord<User>();
 		try {
 			User user = new User();
-			user.setEmail(form.getEmail());
-			user.setName(form.getName());
-			user.setPassword(form.getPassword());
-			//user.setPhoto(uploadService.uploadMultipart(form.getPhoto(), request));
-			user.setGender(form.getGender());
-			user.setImageUrl(uploadService.uploadMultipart(form.getPhoto(), request));
+			user.setEmail(email);
+			user.setName(name);
+			user.setPassword(password);
+			user.setFacebookId(facebookId);
+			user.setTelephone(telephone);
+			user.setGender(gender);
+			user.setImageUrl(uploadService.uploadMultipart(file, request));
 			
 			user = userService.signUp(user);
 			if(user!=null){

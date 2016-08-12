@@ -58,7 +58,7 @@ public class UploadServiceImpl implements UploadService{
 
 					System.out.println("MESSAGE ==> YOU HAVE BEEN UPLOADED " + savePath + File.separator + filename
 							+ " SUCCESSFULLY!");
-					return getURLWithContextPath(request) + "image-thumbnails/" + "thumbnail-" + uuid + "." + extension;
+					return getURLWithContextPath(request) + "/image-thumbnails/" + "thumbnail-" + uuid + "." + extension;
 				} catch (Exception e) {
 					System.out.println("MESSAGE ==> YOU FAILED TO UPLOAD " + filename + " => " + e.getMessage());
 				}
