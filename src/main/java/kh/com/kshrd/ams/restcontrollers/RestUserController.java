@@ -82,12 +82,18 @@ public class RestUserController {
 	public ResponseRecord<User> signIn(@RequestBody UserForm.SignInForm form){
 		ResponseRecord<User> response = new ResponseRecord<User>();
 		try {
-			response.setCode("0000");
-			response.setMessage("YOU HAVE BEEN SIGNED IN SUCCESSFULLY.");
 			User user = new User();
 			user.setEmail(form.getEmail());
 			user.setPassword(form.getPassword());
-			response.setData(userService.signIn(user));
+			User userLogined = userService.signIn(user);
+			if(userLogined==null){
+				response.setCode("9999");
+				response.setMessage("YOU HAVE BEEN FIALED WHEN LOGIN PLEASE TRY AGAIN.");
+			}else{
+				response.setCode("0000");
+				response.setMessage("YOU HAVE BEEN SIGNED IN SUCCESSFULLY.");
+				response.setData(userLogined);
+			}
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
