@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 			User userLogined = userRepository.signIn(user);
 			if (userLogined != null){
 				if (passwordEncoder.matches(user.getPassword(), userLogined.getPassword())){
-					return user;
+					return userLogined;
 				}
 			}
 		} catch (Exception e) {

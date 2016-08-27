@@ -174,6 +174,8 @@ public class UserRepositoryImpl implements UserRepository{
 						user.setGender(rs.getString("gender"));
 						user.setTelephone(rs.getString("telephone"));
 						user.setStatus(rs.getString("status"));
+						user.setImageUrl(rs.getString("image_url"));
+						user.setFacebookId(rs.getString("facebook_id"));
 						return user;
 					};
 		

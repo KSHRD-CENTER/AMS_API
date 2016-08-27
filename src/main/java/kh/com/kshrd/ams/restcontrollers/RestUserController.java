@@ -87,7 +87,7 @@ public class RestUserController {
 			User user = new User();
 			user.setEmail(form.getEmail());
 			user.setPassword(form.getPassword());
-			response.setData(userService.signUp(user));
+			response.setData(userService.signIn(user));
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
