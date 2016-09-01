@@ -75,7 +75,7 @@ public class WishListRepositoryImpl implements WishListRepository{
 					+ " D.id AS category_id "
 					+ "FROM wishlists A "
 					+ "INNER JOIN articles B ON A.article_id = B.id AND B.status = '1' "
-					+ " JOIN users C ON B.user_id = C.id AND C.status = '1' "
+					+ "LEFT JOIN users C ON B.user_id = C.id AND C.status = '1' "
 					+ "LEFT JOIN categories D ON B.category_id = D.id AND D.status = '1' "
 					+ "WHERE A.status = '1' "
 					+ "AND A.user_id = ? "
