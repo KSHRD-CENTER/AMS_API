@@ -56,7 +56,7 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 				   + "SET title = ? "
 				   + "	, description = ? "
 				   + "	, user_id = ? "
-				   + "	, category_id = ? "
+				   + "	, category_id = ?, "
 				   + "	, image = ? "
 				   + "WHERE id = ?";
 		int result = jdbcTemplate.update(sql, 

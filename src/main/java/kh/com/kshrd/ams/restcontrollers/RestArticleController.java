@@ -116,7 +116,7 @@ public class RestArticleController {
 			article.setAuthor(user);
 			article.setTitle(form.getTitle());
 			article.setDescription(form.getDescription());
-			article.setImage(form.getImage());
+			article.setImage(uploadService.uploadMultipart(form.getImage(), request));
 			
 			Category category = new Category();
 			category.setId(form.getCategoryId());
