@@ -1,7 +1,5 @@
 package kh.com.kshrd.ams.forms;
 
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ArticleForm {
@@ -71,7 +69,7 @@ public class ArticleForm {
 		@JsonProperty("STATUS")
 		private String status;
 		@JsonProperty("IMAGE")
-		private CommonsMultipartFile image;
+		private String image;
 		
 		public String getTitle() {
 			return title;
@@ -103,12 +101,13 @@ public class ArticleForm {
 		public void setStatus(String status) {
 			this.status = status;
 		}
-		public CommonsMultipartFile getImage() {
+		public String getImage() {
 			return image;
 		}
-		public void setImage(CommonsMultipartFile image) {
+		public void setImage(String image) {
 			this.image = image;
 		}
+		
 		@Override
 		public String toString() {
 			return "UpdateArticleForm [title=" + title + ", description=" + description + ", author=" + author
