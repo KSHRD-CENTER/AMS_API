@@ -102,8 +102,9 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 					+ "LEFT JOIN categories B ON A.category_id = B.id "
 					+ "WHERE A.status = '1' "
 					+ "AND LOWER(A.title) LIKE LOWER(?) "
+					+ "ORDER BY A.id DESC "
 					+ "LIMIT ? "
-					+ "OFFSET ?";
+					+ "OFFSET ? ";
 	
 		return jdbcTemplate.query(sql,
 				new Object[]{
