@@ -18,7 +18,12 @@ public interface UserService {
 	//TODO: TO UPDATE USER PROFILE
 	public User updateProfile(User user);
 	
+	//TODO: TO DELETE USER BY ID
+	public User deleteUserById(Long userId);
+	
 	//TODO: TO FIND ALL USERS
 	public List<User> findAllUsers();
 
+	//TODO: TO FIND USER BY ID
+	public User findUserById(User user);
 }

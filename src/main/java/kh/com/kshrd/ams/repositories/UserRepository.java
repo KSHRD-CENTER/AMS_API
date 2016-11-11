@@ -17,7 +17,7 @@ public interface UserRepository {
 	
 	public User update(User user);
 	
-	public boolean delete(int id);
+	public User delete(Long id);
 	
 	public User signIn(User user);
 }

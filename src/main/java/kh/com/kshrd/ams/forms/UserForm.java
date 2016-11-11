@@ -2,6 +2,7 @@ package kh.com.kshrd.ams.forms;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserForm {
@@ -85,7 +86,11 @@ public class UserForm {
 	}
 	
 	public static class updateUserProfile extends UserForm{
+		@JsonIgnore
+		private String password;
 		
+		@JsonIgnore
+		private String email;	
 	}
 	
 	public static class SignupForm extends UserForm{

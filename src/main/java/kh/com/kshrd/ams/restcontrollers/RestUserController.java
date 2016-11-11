@@ -1,5 +1,7 @@
 package kh.com.kshrd.ams.restcontrollers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,12 @@ import com.wordnik.swagger.annotations.ApiImplicitParam;
 import com.wordnik.swagger.annotations.ApiImplicitParams;
 import com.wordnik.swagger.annotations.ApiOperation;
 
+import kh.com.kshrd.ams.exceptions.BusinessException;
+import kh.com.kshrd.ams.forms.ArticleForm;
 import kh.com.kshrd.ams.forms.UserForm;
+import kh.com.kshrd.ams.models.Article;
+import kh.com.kshrd.ams.models.Category;
+import kh.com.kshrd.ams.models.Response;
 import kh.com.kshrd.ams.models.ResponseList;
 import kh.com.kshrd.ams.models.ResponseRecord;
 import kh.com.kshrd.ams.models.User;
@@ -100,13 +107,101 @@ public class RestUserController {
 		return response;
 	}
 	
+		
+	@ApiOperation("TODO: TO UPDATE A USER BY ID")
+	@RequestMapping(value="/v1/api/users/{id}", method = RequestMethod.POST)
+	public ResponseRecord<User> update(
+			@PathVariable("id") Long id,
+			@RequestParam("NAME") String name,
+			@RequestParam("GENDER") String gender,
+			@RequestParam("TELEPHONE") String telephone,
+			@RequestParam("PHOTO") CommonsMultipartFile file, 
+			HttpServletRequest request){
+		ResponseRecord<User> responseModel = new ResponseRecord<User>();
+		try {
+			User user = new User();
+			user.setId(id);
+			user.setName(name);
+			user.setTelephone(telephone);
+			user.setGender(gender);
+			user.setImageUrl(uploadService.uploadMultipart(file, request));
+			user = userService.updateProfile(user);
+			if(user!=null){
+				responseModel.setCode("0000");
+				responseModel.setMessage("YOU HAVE BEEN SIGNED UP SUCCESSFULLY.");
+				responseModel.setData(user);
+			}else{
+				responseModel.setCode("9999");
+				responseModel.setMessage("YOU HAVE BEEN SIGNED UP FAILURE.");
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return responseModel;
+	}
+	
+	@ApiOperation("TODO: TO DELETE A USER BY ID")
+	@RequestMapping(value="/v1/api/users/{id}", method = RequestMethod.DELETE)
+	public ResponseRecord<User> delete(
+			@PathVariable("id") Long id){
+		ResponseRecord<User> responseModel = new ResponseRecord<User>();
+		try {
+			User user = new User();
+			user = userService.deleteUserById(id);
+			if(user!=null){
+				responseModel.setCode("0000");
+				responseModel.setMessage("USER HAVE BEEN DELETE SUCCESSFULLY.");
+				responseModel.setData(user);
+			}else{
+				responseModel.setCode("9999");
+				responseModel.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A RESOURCE ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return responseModel;
+	}
 	@ApiOperation("TODO: TO LIST ALL USERS")
 	@RequestMapping(value="/v1/api/users", method = RequestMethod.GET)
 	public ResponseList<User> getAllUsers(){
 		ResponseList<User> response = new ResponseList<User>();
 		try{
-			response.setCode("0000");
-			response.setData(userService.findAllUsers());
+			List<User> userList = userService.findAllUsers();
+			if (userList == null) {
+				response.setCode("0000");
+				response.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A RESOURCE ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
+				response.setData(null);
+			} else {
+				response.setCode("0000");
+				response.setMessage("RECORDS FOUND.");
+				response.setData(userList);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return response;
+		
+	}
+	
+	
+	@ApiOperation("TODO: TO LIST USER BY ID")
+	@RequestMapping(value="/v1/api/users/{userId}", method = RequestMethod.GET)
+	public ResponseRecord<User> getAllUserById(@PathVariable("userId") Long userId){
+		ResponseRecord<User> response = new ResponseRecord<User>();
+
+		try{
+			User user = new User();
+			user.setId(userId);
+			User foundUser = userService.findUserById(user);
+			if(foundUser==null){
+				response.setCode("9999");
+				response.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A USER ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
+			}else{
+				response.setCode("0000");
+				response.setMessage("USER FOUND.");
+				response.setData(foundUser);
+			}
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -125,8 +220,16 @@ public class RestUserController {
 	public ResponseList<WishList> findAllWishListByUserId(@PathVariable("userId") Long userId, @ApiIgnore Pagination pagination){
 		ResponseList<WishList> response = new ResponseList<WishList>();
 		try{
-			response.setCode("0000");
-			response.setData(wishListService.findAllWishLists(userId, pagination));
+			
+			List<WishList> findAllWishLists = wishListService.findAllWishLists(userId, pagination);
+			if(findAllWishLists==null){
+				response.setCode("9999");
+				response.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A USER ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
+			}else{
+				response.setMessage("RECORD FOUND.");
+				response.setCode("0000");
+				response.setData(wishListService.findAllWishLists(userId, pagination));
+			}
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
