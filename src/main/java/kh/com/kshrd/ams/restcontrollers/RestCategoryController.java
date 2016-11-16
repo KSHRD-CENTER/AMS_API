@@ -1,5 +1,7 @@
 package kh.com.kshrd.ams.restcontrollers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +36,18 @@ public class RestCategoryController {
 	public ResponseList<Category> findAllCategories(CategoryFilter filter){
 		ResponseList<Category> responseModel = new ResponseList<Category>();
 		try {
-			responseModel.setCode("0000");
-			responseModel.setMessage("YOU HAVE BEEN FIND ALL CATEGORIES SUCCESSFULLY.");
-			responseModel.setData(categoryService.findAllCategories(filter));
+			List<Category> list = categoryService.findAllCategories(filter);
+			
+			 if (list == null || list.isEmpty()) {
+
+					responseModel.setCode("9999");
+					responseModel.setMessage("NO DATA FOUND!");
+			}else{
+				responseModel.setCode("0000");
+				responseModel.setMessage("YOU HAVE BEEN FIND ALL CATEGORIES SUCCESSFULLY.");
+				responseModel.setData(list);
+			}
+			
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
@@ -48,10 +59,18 @@ public class RestCategoryController {
 	public ResponseList<Article> findAllArticleByCategoryId(@PathVariable("id") Long id, Pagination pagination){
 		ResponseList<Article> response = new ResponseList<Article>();
 		try {
-			response.setCode("0000");
-			response.setMessage("YOU HAVE BEEN FIND ALL CATEGORIES SUCCESSFULLY.");
-			response.setData(articleService.findAllArticlesByCategoryId(id, pagination));
-			response.setPagination(pagination);
+			List<Article> list = articleService.findAllArticlesByCategoryId(id, pagination);
+			
+			if (list == null || list.isEmpty()) {
+				response.setCode("9999");
+				response.setMessage("NO DATA FOUND!");
+			}else{
+				response.setCode("0000");
+				response.setMessage("YOU HAVE BEEN FIND ALL CATEGORIES SUCCESSFULLY.");
+				response.setData(list);
+				response.setPagination(pagination);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

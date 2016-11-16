@@ -1,5 +1,7 @@
 package kh.com.kshrd.ams.restcontrollers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,9 +68,16 @@ public class RestWishListController {
 	public ResponseList<WishList> findAllWishListByUserId(@PathVariable("userId") Long userId, @ApiIgnore Pagination pagination){
 		ResponseList<WishList> response = new ResponseList<WishList>();
 		try{
-			response.setCode("0000");
-			response.setMessage("YOU HAVE BEEN FOUND SUCCESSFULLY.");
-			response.setData(wishListService.findAllWishLists(userId, pagination));
+			List<WishList> list  = wishListService.findAllWishLists(userId, pagination);
+			
+			if (list == null || list.isEmpty()) {
+				response.setCode("9999");
+				response.setMessage("NO DATA FOUND.");
+			}else {
+				response.setCode("0000");
+				response.setMessage("YOU HAVE BEEN FOUND SUCCESSFULLY.");
+				response.setData(list);
+			}
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
