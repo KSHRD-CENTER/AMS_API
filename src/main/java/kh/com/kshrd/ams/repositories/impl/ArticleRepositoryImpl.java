@@ -97,9 +97,17 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 					+ " A.user_id, "
 					+ " A.category_id, "
 					+ " B.name AS category, "
-					+ " A.image "
+					+ " A.image, "
+					+ " U.name AS username, "
+					+ " U.email, "
+					+ " U.gender, "
+					+ " U.telephone, "
+					+ " U.status AS user_status, "
+					+ " U.image_url AS user_image_url, "
+					+ " U.facebook_id "
 					+ "FROM articles A "
 					+ "LEFT JOIN categories B ON A.category_id = B.id "
+					+ "LEFT JOIN users U on U.id = A.user_id "
 					+ "WHERE A.status = '1' "
 					+ "AND LOWER(A.title) LIKE LOWER(?) "
 					+ "ORDER BY A.id DESC "
@@ -125,6 +133,13 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 						
 						User user = new User();
 						user.setId(rs.getLong("user_id"));
+						user.setEmail(rs.getString("email"));
+						user.setName(rs.getString("username"));
+						user.setGender(rs.getString("gender"));
+						user.setTelephone(rs.getString("telephone"));
+						user.setStatus(rs.getString("user_status"));
+						user.setImageUrl(rs.getString("user_image_url"));
+						user.setFacebookId(rs.getString("facebook_id"));
 						article.setAuthor(user);
 						
 						Category category = new Category();
@@ -146,9 +161,17 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 					+ " A.user_id, "
 					+ " A.category_id, "
 					+ " B.name AS category, "
-					+ " A.image "
+					+ " A.image, "
+					+ " U.name AS username, "
+					+ " U.email, "
+					+ " U.gender, "
+					+ " U.telephone, "
+					+ " U.status AS user_status, "
+					+ " U.image_url AS user_image_url, "
+					+ " U.facebook_id "
 					+ "FROM articles A "
 					+ "LEFT JOIN categories B ON A.category_id = B.id "
+					+ "LEFT JOIN users U on U.id = A.user_id "
 					+ "WHERE A.id = ? "
 					+ "AND A.status = '1'";
 		return jdbcTemplate.queryForObject(sql,
@@ -166,6 +189,13 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 						
 						User user = new User();
 						user.setId(rs.getLong("user_id"));
+						user.setEmail(rs.getString("email"));
+						user.setName(rs.getString("username"));
+						user.setGender(rs.getString("gender"));
+						user.setTelephone(rs.getString("telephone"));
+						user.setStatus(rs.getString("user_status"));
+						user.setImageUrl(rs.getString("user_image_url"));
+						user.setFacebookId(rs.getString("facebook_id"));
 						article.setAuthor(user);
 						
 						Category category = new Category();
@@ -229,9 +259,17 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 					+ " A.user_id, "
 					+ " A.category_id, "
 					+ " B.name AS category, "
-					+ " A.image "
+					+ " A.image, "
+					+ " U.name AS username, "
+					+ " U.email, "
+					+ " U.gender, "
+					+ " U.telephone, "
+					+ " U.status AS user_status, "
+					+ " U.image_url AS user_image_url, "
+					+ " U.facebook_id "
 					+ "FROM articles A "
 					+ "LEFT JOIN categories B ON A.category_id = B.id "
+					+ "LEFT JOIN users U on U.id = A.user_id "
 					+ "WHERE A.status = '1' "
 					+ "AND A.category_id = ?"					
 					+ "LIMIT ? "
@@ -256,6 +294,13 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 					
 					User user = new User();
 					user.setId(rs.getLong("user_id"));
+					user.setEmail(rs.getString("email"));
+					user.setName(rs.getString("username"));
+					user.setGender(rs.getString("gender"));
+					user.setTelephone(rs.getString("telephone"));
+					user.setStatus(rs.getString("user_status"));
+					user.setImageUrl(rs.getString("user_image_url"));
+					user.setFacebookId(rs.getString("facebook_id"));
 					article.setAuthor(user);
 					
 					Category category = new Category();
