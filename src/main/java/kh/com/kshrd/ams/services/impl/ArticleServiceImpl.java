@@ -1,6 +1,5 @@
 package kh.com.kshrd.ams.services.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,63 +19,63 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleRepository articleRepository;
 
 	@Override
-	public Article addNewArticle(Article article) throws BusinessException {
+	public Article addNewArticle(Article article) {
 		try {
 			return articleRepository.save(article);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusinessException();
 		}
+		return null;
 	}
 
 	@Override
-	public Article updateArticle(Article article) throws BusinessException {
+	public Article updateArticle(Article article){
 		try {
 			return articleRepository.update(article);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusinessException();
 		}
+		return null;
 	}
 
 	@Override
-	public boolean deleteArticle(Long id) throws BusinessException {
+	public Article deleteArticle(Long id) {
 		try {
 			return articleRepository.delete(id);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusinessException();
 		}
+		return null;
 	}
 
 	@Override
-	public List<Article> findAllArticles(ArticleFilter filter, Pagination pagination) throws BusinessException {
+	public List<Article> findAllArticles(ArticleFilter filter, Pagination pagination) {
 		try {
 			return articleRepository.findAll(filter, pagination);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusinessException();
 		}
+		return null;
 	}
 
 	@Override
-	public Article findArticleById(Long id) throws BusinessException {
+	public Article findArticleById(Long id) {
 		try {
 			return articleRepository.findOne(id);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusinessException();
 		}
+		return null;
 	}
 
 	@Override
-	public List<Article> findAllArticlesByCategoryId(Long categoryId, Pagination pagination) throws BusinessException {
+	public List<Article> findAllArticlesByCategoryId(Long categoryId, Pagination pagination) {
 		try {
 			return articleRepository.findAllByCategoryId(categoryId, pagination);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusinessException();
 		}
+		return null;
 	}
 
 }

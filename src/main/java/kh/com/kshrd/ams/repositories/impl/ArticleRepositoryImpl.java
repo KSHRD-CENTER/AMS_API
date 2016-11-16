@@ -23,7 +23,7 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public Article save(Article article) throws SQLException {
+	public Article save(Article article) {
 		Long id = jdbcTemplate.queryForObject("SELECT nextval('articles_id_seq')", Long.class);
 		int result = jdbcTemplate.update("INSERT INTO articles(id, "
 										 + "title, "
@@ -50,7 +50,7 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 	}
 
 	@Override
-	public Article update(Article article) throws SQLException {
+	public Article update(Article article) {
 		System.out.println("ARTICLE UPDATED ==> " + article);
 		String sql = "UPDATE articles "
 				   + "SET title = ? "
@@ -75,19 +75,23 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 	}
 
 	@Override
-	public boolean delete(Long id) throws SQLException {
-		String sql = "UPDATE articles "
-				   + "SET status = '0' "
-				   + "WHERE id = ?";
-		int result = jdbcTemplate.update(sql, new Object[] { id });
-		if (result > 0) {
-			return true;
+	public Article delete(Long id) {
+		Article article = this.findOne(id);
+
+		if (article != null) {
+			String sql = "UPDATE articles "
+					   + "SET status = '0' "
+					   + "WHERE id = ?";
+			int result = jdbcTemplate.update(sql, new Object[] { id });
+			if (result > 0) {
+				return article;
+			}
 		}
-		return false;
+		return null;
 	}
 
 	@Override
-	public List<Article> findAll(ArticleFilter filter, Pagination pagination) throws SQLException {
+	public List<Article> findAll(ArticleFilter filter, Pagination pagination) {
 		pagination.setTotalCount(this.count(filter));
 		String sql =  "SELECT A.id, "
 					+ "	A.title, "
@@ -152,7 +156,7 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 	}
 
 	@Override
-	public Article findOne(Long id) throws SQLException {
+	public Article findOne(Long id) {
 		String sql =  "SELECT A.id, "
 					+ "	A.title, "
 					+ " A.description, "
@@ -208,22 +212,22 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 	}
 
 	@Override
-	public List<Article> findAll(Pagination pagination) throws SQLException {
+	public List<Article> findAll(Pagination pagination) {
 		return null;
 	}
 
 	@Override
-	public List<Article> findAll(ArticleFilter fitler) throws SQLException {
+	public List<Article> findAll(ArticleFilter fitler) {
 		return null;
 	}
 
 	@Override
-	public List<Article> findAll() throws SQLException {
+	public List<Article> findAll() {
 		return null;
 	}
 
 	@Override
-	public Long count() throws SQLException {
+	public Long count() {
 		String sql =  "SELECT COUNT(A.id) "
 					+ "FROM articles A "
 					+ "WHERE A.status = '1'";
@@ -234,7 +238,7 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 	}
 
 	@Override
-	public Long count(ArticleFilter filter) throws SQLException {
+	public Long count(ArticleFilter filter) {
 		String sql =  "SELECT COUNT(A.id) "
 					+ "FROM articles A "
 					+ "WHERE A.status = '1' "

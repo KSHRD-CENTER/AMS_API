@@ -1,6 +1,6 @@
 package kh.com.kshrd.ams.services.impl;
 
-import java.sql.SQLException;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Category> findAllCategories(CategoryFilter filter) throws BusinessException {
 		try {
 			return categoryRepository.findAll(filter);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BusinessException();
 		}
@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category findCategoryById(Long id) throws BusinessException {
 		try {
 			return categoryRepository.findOne(id);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BusinessException();
 		}

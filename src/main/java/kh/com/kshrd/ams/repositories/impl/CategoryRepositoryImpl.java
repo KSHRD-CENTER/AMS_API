@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import kh.com.kshrd.ams.filtering.CategoryFilter;
+import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.models.Category;
 import kh.com.kshrd.ams.repositories.CategoryRepository;
 import kh.com.kshrd.ams.utilities.Pagination;
@@ -21,7 +22,7 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public List<Category> findAll(CategoryFilter fitler) throws SQLException {
+	public List<Category> findAll(CategoryFilter fitler) {
 		String sql =  "SELECT A.id, "
 					+ "	A.name, "
 					+ "	A.status, "
@@ -43,7 +44,7 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 	}
 
 	@Override
-	public Category findOne(Long id) throws SQLException {
+	public Category findOne(Long id) {
 		String sql =  "SELECT A.id, "
 				+ "	A.name, "
 				+ "	A.status, "
@@ -66,7 +67,7 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 	}
 
 	@Override
-	public Category save(Category category) throws SQLException {
+	public Category save(Category category) {
 
 		Long id = jdbcTemplate.queryForObject("SELECT nextval('categories_id_seq')", Long.class);
 		String sql = "INSERT INTO categories (id, name, status, parent_id) "
@@ -84,13 +85,13 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 	}
 
 	@Override
-	public boolean delete(Long id) throws SQLException {
+	public Category delete(Long id) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
-	public Category update(Category category) throws SQLException {
+	public Category update(Category category) {
 		String sql = "UPDATE categories "
 				   + "SET name = ?, "
 				   +  "status = ?, "
@@ -111,31 +112,31 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 	}
 
 	@Override
-	public List<Category> findAll(Pagination pagination) throws SQLException {
+	public List<Category> findAll(Pagination pagination) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Category> findAll(CategoryFilter fitler, Pagination pagination) throws SQLException {
+	public List<Category> findAll(CategoryFilter fitler, Pagination pagination) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Category> findAll() throws SQLException {
+	public List<Category> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Long count() throws SQLException {
+	public Long count() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Long count(CategoryFilter filter) throws SQLException {
+	public Long count(CategoryFilter filter) {
 		// TODO Auto-generated method stub
 		return null;
 	}

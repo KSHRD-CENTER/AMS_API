@@ -71,6 +71,12 @@ public class WishListRepositoryImpl implements WishListRepository{
 					+ " B.image, "
 					+ " C.name AS author, "
 					+ " C.id AS author_id, "
+					+ " C.email, "
+					+ " C.gender, "
+					+ " C.telephone, "
+					+ " C.status AS user_status, "
+					+ " C.image_url AS user_image_url, "
+					+ " C.facebook_id, "
 					+ " D.name AS category, "
 					+ " D.id AS category_id "
 					+ "FROM wishlists A "
@@ -102,6 +108,12 @@ public class WishListRepositoryImpl implements WishListRepository{
 					User user = new User();
 					user.setId(rs.getLong("author_id"));
 					user.setName(rs.getString("author"));
+					user.setEmail(rs.getString("email"));
+					user.setGender(rs.getString("gender"));
+					user.setTelephone(rs.getString("telephone"));
+					user.setStatus(rs.getString("user_status"));
+					user.setImageUrl(rs.getString("user_image_url"));
+					user.setFacebookId(rs.getString("facebook_id"));
 					article.setAuthor(user);
 					
 					Category category = new Category();

@@ -52,7 +52,7 @@ public class RestCategoryController {
 			response.setMessage("YOU HAVE BEEN FIND ALL CATEGORIES SUCCESSFULLY.");
 			response.setData(articleService.findAllArticlesByCategoryId(id, pagination));
 			response.setPagination(pagination);
-		} catch (BusinessException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return response;

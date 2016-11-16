@@ -222,13 +222,13 @@ public class RestUserController {
 		try{
 			
 			List<WishList> findAllWishLists = wishListService.findAllWishLists(userId, pagination);
-			if(findAllWishLists==null){
+			if(findAllWishLists == null || findAllWishLists.isEmpty()){
 				response.setCode("9999");
 				response.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A USER ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
 			}else{
 				response.setMessage("RECORD FOUND.");
 				response.setCode("0000");
-				response.setData(wishListService.findAllWishLists(userId, pagination));
+				response.setData(findAllWishLists);
 			}
 		}catch(Exception ex){
 			ex.printStackTrace();
