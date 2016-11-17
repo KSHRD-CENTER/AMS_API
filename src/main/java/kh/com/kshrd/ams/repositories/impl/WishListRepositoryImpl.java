@@ -44,15 +44,18 @@ public class WishListRepositoryImpl implements WishListRepository{
 	}
 
 	@Override
-	public boolean delete(Long id) {
-		String sql = "UPDATE wishlists "
-				   + "SET status = '0' "
-				   + "WHERE id = ?";
-		int result = jdbcTemplate.update(sql, new Object[] { id });
-		if (result > 0) {
-			return true;
+	public WishList delete(Long id) {
+		WishList wishList = findOne(id);
+		if (wishList != null) {
+			String sql = "UPDATE wishlists "
+					   + "SET status = '0' "
+					   + "WHERE id = ?";
+			int result = jdbcTemplate.update(sql, new Object[] { id });
+			if (result > 0) {
+				return wishList;
+			}
 		}
-		return false;
+		return null;
 	}
 
 	@Override

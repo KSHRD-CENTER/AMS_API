@@ -9,17 +9,17 @@ import kh.com.kshrd.ams.utilities.Pagination;
 public interface WishListRepository {
 	
 	//TODO: TO SAVE WISH LIST
-	public WishList save(WishList wishList) throws SQLException;
+	public WishList save(WishList wishList);
 	
 	//TODO: TO REMOVE THE WISH LIST
-	public boolean delete(Long id) throws SQLException;
+	public WishList delete(Long id);
 	
 	//TODO: TO LIST ALL WISH LIST BY USER ID
-	public List<WishList> findAllByUserId(Long id, Pagination pagination) throws SQLException;
+	public List<WishList> findAllByUserId(Long id, Pagination pagination);
 	
 	public WishList findOne(Long id) throws SQLException;
 	
 	//TODO: TO COUNT WISH LIST BY UserId
-	public Long count(Long id) throws SQLException;
+	public Long count(Long id);
 
 }

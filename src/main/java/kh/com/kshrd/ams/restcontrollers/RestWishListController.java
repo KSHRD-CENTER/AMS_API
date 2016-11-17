@@ -86,12 +86,14 @@ public class RestWishListController {
 	
 	@ApiOperation("TODO: TO REMOVE ARTICLE FROM WISH LIST")
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-	public Response removeArticleFromWishList(@PathVariable("id") Long id){
-		Response response = new Response();
+	public ResponseRecord<WishList> removeArticleFromWishList(@PathVariable("id") Long id){
+		ResponseRecord<WishList> response = new ResponseRecord<WishList>();
 		try{
-			if(wishListService.removeArticleFromWishList(id)){
+			WishList wishList = wishListService.removeArticleFromWishList(id);
+			if (wishList != null) {
 				response.setCode("0000");
 				response.setMessage("YOU HAVE BEEN REMOVE SUCCESSFULLY.");
+				response.setData(wishList);
 			}else{
 				response.setCode("9999");
 				response.setMessage("FAILURE WHEN REMOVE SAVE LIST.");

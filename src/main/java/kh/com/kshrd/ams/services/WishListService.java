@@ -9,11 +9,11 @@ import kh.com.kshrd.ams.utilities.Pagination;
 public interface WishListService {
 
 	//TODO: TO SAVE ARTICEL TO WISH LIST
-	public WishList saveArticleToWishList(WishList wishList) throws BusinessException;
+	public WishList saveArticleToWishList(WishList wishList);
 	
 	//TODO: TO REMOVE ARTICLE FROM WISH LIST
-	public boolean removeArticleFromWishList(Long wishListId) throws BusinessException;
+	public WishList removeArticleFromWishList(Long wishListId);
 	
 	//TODO: TO LIST ALL WISH LIST BY USER ID
-	public List<WishList> findAllWishLists(Long userId, Pagination pagination) throws BusinessException;
+	public List<WishList> findAllWishLists(Long userId, Pagination pagination);
 }

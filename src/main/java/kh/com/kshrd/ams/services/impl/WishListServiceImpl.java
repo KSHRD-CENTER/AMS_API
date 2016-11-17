@@ -19,33 +19,33 @@ public class WishListServiceImpl implements WishListService{
 	private WishListRepository wishListRepository;
 	
 	@Override
-	public WishList saveArticleToWishList(WishList wishList)  throws BusinessException{
+	public WishList saveArticleToWishList(WishList wishList){
 		try {
 			return wishListRepository.save(wishList);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusinessException();
 		}
+		return null;
 	}
 
 	@Override
-	public boolean removeArticleFromWishList(Long wishListId) throws BusinessException {
+	public WishList removeArticleFromWishList(Long wishListId){
 		try {
 			return wishListRepository.delete(wishListId);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusinessException();
 		}
+		return null;
 	}
 
 	@Override
-	public List<WishList> findAllWishLists(Long userId, Pagination pagination)  throws BusinessException{
+	public List<WishList> findAllWishLists(Long userId, Pagination pagination){
 		try {
 			return wishListRepository.findAllByUserId(userId, pagination);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusinessException();
 		}
+		return null;
 	}
 	
 	
