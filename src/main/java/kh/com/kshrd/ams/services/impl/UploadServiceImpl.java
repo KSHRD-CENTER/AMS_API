@@ -47,7 +47,7 @@ public class UploadServiceImpl implements UploadService{
 					stream.close();
 
 					try {
-						Thumbnails.of(savePath + File.separator + filename).forceSize(320, 320)
+						Thumbnails.of(savePath + File.separator + filename).size(640, 480)
 								.toFiles(pathThumbnails, Rename.PREFIX_HYPHEN_THUMBNAIL);
 					} catch (Exception ex) {
 						BufferedOutputStream streamFile = new BufferedOutputStream(
