@@ -5,37 +5,27 @@ import java.util.List;
 
 public class UserFilter {
 
-	private String title;
-	private String categoryId;
+	private String name;
 	
 	public UserFilter(){
-		this.title = "";
+		this.name = "";
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	public String getCategoryId() {
-		return categoryId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
 
 	public Object[] getFilters() {
 		List<Object> filters = new ArrayList<Object>();
-		if (title != null) {
-			filters.add(title);
+		if (name != null) {
+			filters.add(name);
 		}
-		if(categoryId != null){
-			filters.add(categoryId);
-		}
+
 		return filters.toArray();
 	}
 

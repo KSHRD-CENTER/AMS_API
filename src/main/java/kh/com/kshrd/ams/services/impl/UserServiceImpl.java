@@ -7,9 +7,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import kh.com.kshrd.ams.filtering.ArticleFilter;
+import kh.com.kshrd.ams.filtering.UserFilter;
+import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.models.User;
 import kh.com.kshrd.ams.repositories.UserRepository;
 import kh.com.kshrd.ams.services.UserService;
+import kh.com.kshrd.ams.utilities.Pagination;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -73,9 +77,9 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<User> findAllUsers() {
+	public List<User> findAllUsers(UserFilter filter, Pagination pagination) {
 		try {
-			return userRepository.findAll();
+			return userRepository.findAll(filter, pagination);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -5,13 +5,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import kh.com.kshrd.ams.filtering.UserFilter;
 import kh.com.kshrd.ams.models.User;
 import kh.com.kshrd.ams.repositories.UserRepository;
+import kh.com.kshrd.ams.utilities.Pagination;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository{
@@ -85,7 +86,8 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 
 	@Override
-	public List<User> findAll() {
+	public List<User> findAll(UserFilter filter, Pagination pagination) {
+		pagination.setTotalCount(this.count(filter));
 		String sql =  "SELECT id, "
 				+ "	name, "
 				+ " password, "
@@ -96,9 +98,18 @@ public class UserRepositoryImpl implements UserRepository{
 				+ " image_url, "
 				+ " facebook_id "
 				+ "FROM users "
-				+ "WHERE status = '1' ";
+				+ "WHERE status = '1' "					
+				+ "AND LOWER(name) LIKE LOWER(?) "
+				+ "ORDER BY id DESC "
+				+ "LIMIT ? "
+				+ "OFFSET ? ";
 
 		return jdbcTemplate.query(sql,
+				new Object[]{
+						"%" + filter.getName() + "%",
+						pagination.getLimit(), 
+						pagination.offset()
+				}, 
 				new RowMapper<User>(){
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -183,5 +194,20 @@ public class UserRepositoryImpl implements UserRepository{
 				return user;
 			};
 		});
+	}
+	
+	@Override
+	public Long count(UserFilter filter) {
+		String sql =  "SELECT COUNT(A.id) "
+					+ "FROM users A "
+					+ "WHERE A.status = '1' "
+					+ "AND LOWER(A.name) LIKE LOWER(?) ";
+		return jdbcTemplate.queryForObject(
+				sql,
+				new Object[]{
+					"%" + filter.getName() + "%"
+				},
+				Long.class
+		);
 	}
 }

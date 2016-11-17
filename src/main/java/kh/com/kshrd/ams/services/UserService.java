@@ -2,7 +2,9 @@ package kh.com.kshrd.ams.services;
 
 import java.util.List;
 
+import kh.com.kshrd.ams.filtering.UserFilter;
 import kh.com.kshrd.ams.models.User;
+import kh.com.kshrd.ams.utilities.Pagination;
 
 public interface UserService {
 	
@@ -22,8 +24,9 @@ public interface UserService {
 	public User deleteUserById(Long userId);
 	
 	//TODO: TO FIND ALL USERS
-	public List<User> findAllUsers();
+	public List<User> findAllUsers(UserFilter filter, Pagination pagination);
 
 	//TODO: TO FIND USER BY ID
 	public User findUserById(User user);
+	
 }

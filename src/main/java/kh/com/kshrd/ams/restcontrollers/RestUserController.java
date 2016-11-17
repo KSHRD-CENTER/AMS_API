@@ -19,12 +19,8 @@ import com.wordnik.swagger.annotations.ApiImplicitParam;
 import com.wordnik.swagger.annotations.ApiImplicitParams;
 import com.wordnik.swagger.annotations.ApiOperation;
 
-import kh.com.kshrd.ams.exceptions.BusinessException;
-import kh.com.kshrd.ams.forms.ArticleForm;
+import kh.com.kshrd.ams.filtering.UserFilter;
 import kh.com.kshrd.ams.forms.UserForm;
-import kh.com.kshrd.ams.models.Article;
-import kh.com.kshrd.ams.models.Category;
-import kh.com.kshrd.ams.models.Response;
 import kh.com.kshrd.ams.models.ResponseList;
 import kh.com.kshrd.ams.models.ResponseRecord;
 import kh.com.kshrd.ams.models.User;
@@ -161,28 +157,37 @@ public class RestUserController {
 		}
 		return responseModel;
 	}
-	@ApiOperation("TODO: TO LIST ALL USERS")
+	
+	
 	@RequestMapping(value="/v1/api/users", method = RequestMethod.GET)
-	public ResponseList<User> getAllUsers(){
+	@ApiOperation("TODO: TO LIST ALL USERS")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "name", dataType = "string", paramType = "query", defaultValue="",
+				value = "Name of the user"),
+		@ApiImplicitParam(name = "page", dataType = "integer", paramType = "query", defaultValue="1",
+		value = "Results page you want to retrieve (1..N)"),
+		@ApiImplicitParam(name = "limit", dataType = "integer", paramType = "query", defaultValue="15",
+		value = "Number of records per page."),
+	})
+	public ResponseList<User> getAllUsers(@ApiIgnore UserFilter filter, @ApiIgnore Pagination pagination){
 		ResponseList<User> response = new ResponseList<User>();
 		try{
-			List<User> userList = userService.findAllUsers();
-			if (userList == null) {
+			List<User> userList = userService.findAllUsers(filter, pagination);
+			if (userList == null || userList.isEmpty()) {
 				response.setCode("0000");
 				response.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A RESOURCE ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
-				response.setData(null);
 			} else {
 				response.setCode("0000");
 				response.setMessage("RECORDS FOUND.");
 				response.setData(userList);
+				response.setPagination(pagination);
 			}
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
-		
 		return response;
-		
 	}
+	
 	
 	
 	@ApiOperation("TODO: TO LIST USER BY ID")
