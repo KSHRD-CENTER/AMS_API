@@ -81,7 +81,7 @@ public class RestUserController {
 	}
 	
 	@ApiOperation("TODO: TO SIGN IN A NEW USER")
-	@RequestMapping(value="/v1/api/authentication", method = RequestMethod.POST)
+	@RequestMapping(value="/v1/api/authentication", method = RequestMethod.POST, produces="application/json")
 	public ResponseRecord<User> signIn(@RequestBody UserForm.SignInForm form){
 		ResponseRecord<User> response = new ResponseRecord<User>();
 		try {
