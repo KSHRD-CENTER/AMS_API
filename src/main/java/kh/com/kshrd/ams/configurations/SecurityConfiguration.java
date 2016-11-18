@@ -30,13 +30,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		//http.antMatcher("/v1/api/**").authorizeRequests().anyRequest().hasRole("API");
-		//http.authorizeRequests().anyRequest().authenticated();
-		http.authorizeRequests().anyRequest().permitAll();
-
+		http.antMatcher("/v1/api/**").authorizeRequests().anyRequest().hasRole("API");
+		http.authorizeRequests().anyRequest().authenticated();
+		//http.authorizeRequests().anyRequest().permitAll();
 		http.httpBasic().authenticationEntryPoint(authenticationEntryPoint);
+		
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
 
 	}
 	
