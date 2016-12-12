@@ -106,12 +106,12 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		return new DataSourceTransactionManager(dataSource());
 	}
 
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
-				.allowedMethods("GET", "POST", "DELETE", "PUT", "OPTIONS", "PATCH")
-				.allowedOrigins("*");
-	}
+//	@Override
+//	public void addCorsMappings(CorsRegistry registry) {
+//		registry.addMapping("/v1/api/**");
+//				//.allowedMethods("GET", "POST", "DELETE", "PUT", "OPTIONS", "PATCH")
+//				//.allowedOrigins("*");
+//	}
 
 	@Bean
 	public MultipartResolver multipartResolver() {

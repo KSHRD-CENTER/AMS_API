@@ -1,7 +1,10 @@
 package kh.com.kshrd.ams.bootstraps;
 
+import javax.servlet.Filter;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import kh.com.kshrd.ams.configurations.CorsFilter;
 import kh.com.kshrd.ams.configurations.MvcConfiguration;
 import kh.com.kshrd.ams.configurations.RootContextConfiguration;
 
@@ -22,4 +25,9 @@ public class AMSApiBootstrap extends AbstractAnnotationConfigDispatcherServletIn
         return new String[] { "/" };
     }
     
+    @Override
+    protected Filter[] getServletFilters() {
+    	// TODO Auto-generated method stub
+    	return new Filter[] { new CorsFilter()};
+    }
 }
