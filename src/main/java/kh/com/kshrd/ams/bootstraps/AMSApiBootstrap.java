@@ -25,9 +25,9 @@ public class AMSApiBootstrap extends AbstractAnnotationConfigDispatcherServletIn
         return new String[] { "/" };
     }
     
-    @Override
-    protected Filter[] getServletFilters() {
-    	// TODO Auto-generated method stub
-    	return new Filter[] { new CorsFilter()};
-    }
+//    @Override
+//    protected Filter[] getServletFilters() {
+//    	// TODO Auto-generated method stub
+//    	return new Filter[] { new CorsFilter()};
+//    }
 }
