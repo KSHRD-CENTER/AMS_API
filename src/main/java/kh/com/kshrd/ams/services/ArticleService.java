@@ -2,7 +2,6 @@ package kh.com.kshrd.ams.services;
 
 import java.util.List;
 
-import kh.com.kshrd.ams.exceptions.BusinessException;
 import kh.com.kshrd.ams.filtering.ArticleFilter;
 import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.utilities.Pagination;

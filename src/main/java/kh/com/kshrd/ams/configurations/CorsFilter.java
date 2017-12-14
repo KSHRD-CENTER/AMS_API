@@ -10,8 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 //TODO: ADD THE CorsFilter 1 For Control the Response
 // COPY FROM http://websystique.com/springmvc/spring-mvc-4-restful-web-services-crud-example-resttemplate/
 // THAT ALL SORRY FOR LONG TIME HEHE

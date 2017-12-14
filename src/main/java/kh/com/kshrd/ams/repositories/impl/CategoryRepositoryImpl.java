@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import kh.com.kshrd.ams.filtering.CategoryFilter;
-import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.models.Category;
 import kh.com.kshrd.ams.repositories.CategoryRepository;
 import kh.com.kshrd.ams.utilities.Pagination;

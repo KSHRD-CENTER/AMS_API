@@ -3,13 +3,10 @@ package kh.com.kshrd.ams.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import kh.com.kshrd.ams.filtering.ArticleFilter;
 import kh.com.kshrd.ams.filtering.UserFilter;
-import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.models.User;
 import kh.com.kshrd.ams.repositories.UserRepository;
 import kh.com.kshrd.ams.services.UserService;

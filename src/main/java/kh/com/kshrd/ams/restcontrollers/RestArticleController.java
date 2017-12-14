@@ -17,12 +17,10 @@ import com.wordnik.swagger.annotations.ApiImplicitParam;
 import com.wordnik.swagger.annotations.ApiImplicitParams;
 import com.wordnik.swagger.annotations.ApiOperation;
 
-import kh.com.kshrd.ams.exceptions.BusinessException;
 import kh.com.kshrd.ams.filtering.ArticleFilter;
 import kh.com.kshrd.ams.forms.ArticleForm;
 import kh.com.kshrd.ams.models.Article;
 import kh.com.kshrd.ams.models.Category;
-import kh.com.kshrd.ams.models.Response;
 import kh.com.kshrd.ams.models.ResponseList;
 import kh.com.kshrd.ams.models.ResponseRecord;
 import kh.com.kshrd.ams.models.User;
