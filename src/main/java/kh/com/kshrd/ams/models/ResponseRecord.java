@@ -1,10 +1,7 @@
 package kh.com.kshrd.ams.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class ResponseRecord<T> extends Response {
 
-	@JsonProperty("DATA")
 	public T data;
 	
 	public T getData() {

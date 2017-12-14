@@ -1,16 +1,16 @@
 package kh.com.kshrd.ams.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Category {
 
-	@JsonProperty("ID")
 	private Long id;
-	@JsonProperty("NAME")
+
 	private String name;
+	
 	@JsonIgnore
 	private String status;
+	
 	@JsonIgnore
 	private Category parent;
 	

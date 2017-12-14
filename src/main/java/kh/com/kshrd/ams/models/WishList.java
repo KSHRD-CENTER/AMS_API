@@ -4,15 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WishList {
 
-	@JsonProperty("ID")
 	private Long id;
-	@JsonProperty("USER_ID")
+	
+	@JsonProperty("user_id")
 	private Long userId;
-	@JsonProperty("ARTICLE")
+
 	private Article article;
-	@JsonProperty("CREATED_DATE")
+	
+	@JsonProperty("created_date")
 	private String createdDate;
-	@JsonProperty("STATUS")
+
 	private String status;
 	
 	public Long getId() {

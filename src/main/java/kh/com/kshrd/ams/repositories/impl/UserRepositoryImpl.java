@@ -29,20 +29,16 @@ public class UserRepositoryImpl implements UserRepository{
 				+ "password, "
 				+ "email, "
 				+ "gender, "
-				+ "telephone, "
 				+ "status, "
-				+ "image_url, "
-				+ "facebook_id) "
-				+ "VALUES(?, ?, ?, ?, ?, ?, '1', ?, ?)"
+				+ "image_url) "
+				+ "VALUES(?, ?, ?, ?, ?, '1', ?)"
 				, new Object[]{
 						id,
 						user.getName(),
 						user.getPassword(),
 						user.getEmail(),
 						user.getGender(),
-						user.getTelephone(),
-						user.getImageUrl(),
-						user.getFacebookId()
+						user.getImageUrl()
 				});
 		if (result > 0) {
 			return this.findOne(id);
@@ -57,10 +53,8 @@ public class UserRepositoryImpl implements UserRepository{
 				+ " password, "
 				+ " gender, "
 				+ " email, "
-				+ " telephone, "
 				+ " status, "
-				+ " image_url, "
-				+ " facebook_id "
+				+ " image_url "
 				+ "FROM users "
 				+ "WHERE status = '1' "
 				+ "AND id = ?";
@@ -76,10 +70,8 @@ public class UserRepositoryImpl implements UserRepository{
 				user.setPassword(rs.getString("password"));
 				user.setEmail(rs.getString("email"));
 				user.setGender(rs.getString("gender"));
-				user.setTelephone(rs.getString("telephone"));
 				user.setStatus(rs.getString("status"));
 				user.setImageUrl(rs.getString("image_url"));
-				user.setFacebookId(rs.getString("facebook_id"));
 				return user;
 			}
 		});
@@ -93,10 +85,8 @@ public class UserRepositoryImpl implements UserRepository{
 				+ " password, "
 				+ " gender, "
 				+ " email, "
-				+ " telephone, "
 				+ " status, "
-				+ " image_url, "
-				+ " facebook_id "
+				+ " image_url "
 				+ "FROM users "
 				+ "WHERE status = '1' "					
 				+ "AND LOWER(name) LIKE LOWER(?) "
@@ -118,10 +108,8 @@ public class UserRepositoryImpl implements UserRepository{
 				user.setName(rs.getString("name"));
 				user.setEmail(rs.getString("email"));
 				user.setGender(rs.getString("gender"));
-				user.setTelephone(rs.getString("telephone"));
 				user.setStatus(rs.getString("status"));
 				user.setImageUrl(rs.getString("image_url"));
-				user.setFacebookId(rs.getString("facebook_id"));
 				return user;
 			}
 		});
@@ -132,7 +120,6 @@ public class UserRepositoryImpl implements UserRepository{
 		String sql = "UPDATE users "
 				+ " SET name = ?, "
 				+ " gender = ?, "
-				+ " telephone = ?, "
 				+ " status = ?, "
 				+ " image_url = ? "
 				+ "WHERE id = ?";
@@ -140,7 +127,6 @@ public class UserRepositoryImpl implements UserRepository{
 				new Object[]{
 						user.getName(),
 						user.getGender(),
-						user.getTelephone(),
 						"1",
 						user.getImageUrl(),
 						user.getId()
@@ -187,10 +173,8 @@ public class UserRepositoryImpl implements UserRepository{
 				user.setPassword(rs.getString("password"));
 				user.setEmail(rs.getString("email"));
 				user.setGender(rs.getString("gender"));
-				user.setTelephone(rs.getString("telephone"));
 				user.setStatus(rs.getString("status"));
 				user.setImageUrl(rs.getString("image_url"));
-				user.setFacebookId(rs.getString("facebook_id"));
 				return user;
 			};
 		});

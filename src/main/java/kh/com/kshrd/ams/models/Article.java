@@ -4,28 +4,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Article {
 
-	@JsonProperty("ID")
 	private Long id;
 	
-	@JsonProperty("TITLE")
 	private String title;
 	
-	@JsonProperty("DESCRIPTION")
 	private String description;
 	
-	@JsonProperty("CREATED_DATE")
+	@JsonProperty("created_date")
 	private String createdDate;
 	
-	@JsonProperty("AUTHOR")
 	private User author;
 	
-	@JsonProperty("STATUS")
 	private String status;
 	
-	@JsonProperty("CATEGORY")
 	private Category category;
 	
-	@JsonProperty("IMAGE")
+	@JsonProperty("image_url")
 	private String image;
 	
 	public Long getId() {

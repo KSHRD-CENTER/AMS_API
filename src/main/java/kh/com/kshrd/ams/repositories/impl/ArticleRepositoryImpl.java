@@ -105,10 +105,8 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 					+ " U.name AS username, "
 					+ " U.email, "
 					+ " U.gender, "
-					+ " U.telephone, "
 					+ " U.status AS user_status, "
-					+ " U.image_url AS user_image_url, "
-					+ " U.facebook_id "
+					+ " U.image_url AS user_image_url "
 					+ "FROM articles A "
 					+ "LEFT JOIN categories B ON A.category_id = B.id "
 					+ "LEFT JOIN users U on U.id = A.user_id "
@@ -140,10 +138,8 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 						user.setEmail(rs.getString("email"));
 						user.setName(rs.getString("username"));
 						user.setGender(rs.getString("gender"));
-						user.setTelephone(rs.getString("telephone"));
 						user.setStatus(rs.getString("user_status"));
 						user.setImageUrl(rs.getString("user_image_url"));
-						user.setFacebookId(rs.getString("facebook_id"));
 						article.setAuthor(user);
 						
 						Category category = new Category();
@@ -169,10 +165,8 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 					+ " U.name AS username, "
 					+ " U.email, "
 					+ " U.gender, "
-					+ " U.telephone, "
 					+ " U.status AS user_status, "
-					+ " U.image_url AS user_image_url, "
-					+ " U.facebook_id "
+					+ " U.image_url AS user_image_url "
 					+ "FROM articles A "
 					+ "LEFT JOIN categories B ON A.category_id = B.id "
 					+ "LEFT JOIN users U on U.id = A.user_id "
@@ -196,10 +190,8 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 						user.setEmail(rs.getString("email"));
 						user.setName(rs.getString("username"));
 						user.setGender(rs.getString("gender"));
-						user.setTelephone(rs.getString("telephone"));
 						user.setStatus(rs.getString("user_status"));
 						user.setImageUrl(rs.getString("user_image_url"));
-						user.setFacebookId(rs.getString("facebook_id"));
 						article.setAuthor(user);
 						
 						Category category = new Category();
@@ -267,10 +259,8 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 					+ " U.name AS username, "
 					+ " U.email, "
 					+ " U.gender, "
-					+ " U.telephone, "
 					+ " U.status AS user_status, "
-					+ " U.image_url AS user_image_url, "
-					+ " U.facebook_id "
+					+ " U.image_url AS user_image_url "
 					+ "FROM articles A "
 					+ "LEFT JOIN categories B ON A.category_id = B.id "
 					+ "LEFT JOIN users U on U.id = A.user_id "
@@ -301,10 +291,8 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 					user.setEmail(rs.getString("email"));
 					user.setName(rs.getString("username"));
 					user.setGender(rs.getString("gender"));
-					user.setTelephone(rs.getString("telephone"));
 					user.setStatus(rs.getString("user_status"));
 					user.setImageUrl(rs.getString("user_image_url"));
-					user.setFacebookId(rs.getString("facebook_id"));
 					article.setAuthor(user);
 					
 					Category category = new Category();

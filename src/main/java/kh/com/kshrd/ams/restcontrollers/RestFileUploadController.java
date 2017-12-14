@@ -17,6 +17,7 @@ import kh.com.kshrd.ams.services.UploadService;
 
 @RestController
 @Api("FILE MANAGEMENT API")
+@RequestMapping(value="/v1/api/uploadfile")
 public class RestFileUploadController {
 		
 	@Autowired
@@ -24,7 +25,7 @@ public class RestFileUploadController {
 	
 	
 	@ApiOperation("TODO: TO UPLOAD FILE")
-	@RequestMapping(value="/v1/api/uploadfile/single", method = RequestMethod.POST)
+	@RequestMapping(value="/single", method = RequestMethod.POST)
 	public ResponseRecord<String> signup(
 			@RequestParam("FILE") CommonsMultipartFile file, 
 			HttpServletRequest request){

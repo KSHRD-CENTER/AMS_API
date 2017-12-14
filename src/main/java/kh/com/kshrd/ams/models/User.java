@@ -5,23 +5,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
 
-	@JsonProperty("ID")
 	private Long id;
-	@JsonProperty("NAME")
+
+
 	private String name;
-	@JsonProperty("EMAIL")
+
+
 	private String email;
-	@JsonProperty("GENDER")
+
+
 	private String gender;
-	@JsonProperty("TELEPHONE")
-	private String telephone;
-	@JsonProperty("STATUS")
+	
 	private String status;
-	@JsonProperty("FACEBOOK_ID")
-	private String facebookId;
+	
 	@JsonIgnore
 	private String password;
-	@JsonProperty("IMAGE_URL")
+	@JsonProperty("image_url")
 	private String imageUrl;
 
 	public Long getId() {
@@ -48,14 +47,6 @@ public class User {
 		this.gender = gender;
 	}
 
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -64,13 +55,6 @@ public class User {
 		this.status = status;
 	}
 
-	public String getFacebookId() {
-		return facebookId;
-	}
-
-	public void setFacebookId(String facebookId) {
-		this.facebookId = facebookId;
-	}
 
 	public String getPassword() {
 		return password;
@@ -98,8 +82,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", gender=" + gender + ", telephone="
-				+ telephone + ", status=" + status + ", facebookId=" + facebookId + ", password="
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", gender=" + gender + ", status=" + status + ", password="
 				+ password + ", imageUrl=" + imageUrl + "]";
 	}
 

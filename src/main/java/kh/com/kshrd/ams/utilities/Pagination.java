@@ -8,16 +8,14 @@ public class Pagination implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty("PAGE")
 	private int page;
 
-	@JsonProperty("LIMIT")
 	private int limit;
 
-	@JsonProperty("TOTAL_COUNT")
+	@JsonProperty("total_count")
 	private Long totalCount;
 
-	@JsonProperty("TOTAL_PAGES")
+	@JsonProperty("total_pages")
 	private int totalPages;
 
 	public Pagination() {

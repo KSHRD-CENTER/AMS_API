@@ -32,6 +32,7 @@ import kh.com.kshrd.ams.utilities.Pagination;
 
 @RestController
 @Api("USER MANAGEMENT API")
+@RequestMapping("/v1/api/user")
 public class RestUserController {
 	
 	@Autowired
@@ -44,24 +45,22 @@ public class RestUserController {
 	private WishListService wishListService;
 	
 	@ApiOperation("TODO: TO SIGN UP A NEW USER")
-	@RequestMapping(value="/v1/api/users", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseRecord<User> signup(
-			@RequestParam("EMAIL") String email,
-			@RequestParam("NAME") String name,
-			@RequestParam("PASSWORD") String password,
-			@RequestParam("GENDER") String gender,
-			@RequestParam("TELEPHONE") String telephone,
-			@RequestParam("FACEBOOK_ID") String facebookId,
-			@RequestParam("PHOTO") CommonsMultipartFile file, 
+			@RequestParam("email") String email, 
+			@RequestParam("name") String name, 
+			@RequestParam("password") String password, 
+			@RequestParam("gender") String gender, 
+			@RequestParam("photo") CommonsMultipartFile file, 
 			HttpServletRequest request){
+		
 		ResponseRecord<User> responseModel = new ResponseRecord<User>();
+		
 		try {
 			User user = new User();
 			user.setEmail(email);
 			user.setName(name);
 			user.setPassword(password);
-			user.setFacebookId(facebookId);
-			user.setTelephone(telephone);
 			user.setGender(gender);
 			user.setImageUrl(uploadService.uploadMultipart(file, request));
 			
@@ -81,7 +80,7 @@ public class RestUserController {
 	}
 	
 	@ApiOperation("TODO: TO SIGN IN A NEW USER")
-	@RequestMapping(value="/v1/api/authentication", method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value="/authentication", method = RequestMethod.POST, produces="application/json")
 	public ResponseRecord<User> signIn(@RequestBody UserForm.SignInForm form){
 		ResponseRecord<User> response = new ResponseRecord<User>();
 		try {
@@ -105,20 +104,18 @@ public class RestUserController {
 	
 		
 	@ApiOperation("TODO: TO UPDATE A USER BY ID")
-	@RequestMapping(value="/v1/api/users/{id}", method = RequestMethod.POST)
+	@RequestMapping(value="/{id}", method = RequestMethod.POST)
 	public ResponseRecord<User> update(
 			@PathVariable("id") Long id,
-			@RequestParam("NAME") String name,
-			@RequestParam("GENDER") String gender,
-			@RequestParam("TELEPHONE") String telephone,
-			@RequestParam("PHOTO") CommonsMultipartFile file, 
+			@RequestParam("gender") String name,
+			@RequestParam("gender") String gender,
+			@RequestParam("photo") CommonsMultipartFile file, 
 			HttpServletRequest request){
 		ResponseRecord<User> responseModel = new ResponseRecord<User>();
 		try {
 			User user = new User();
 			user.setId(id);
 			user.setName(name);
-			user.setTelephone(telephone);
 			user.setGender(gender);
 			user.setImageUrl(uploadService.uploadMultipart(file, request));
 			user = userService.updateProfile(user);
@@ -137,7 +134,7 @@ public class RestUserController {
 	}
 	
 	@ApiOperation("TODO: TO DELETE A USER BY ID")
-	@RequestMapping(value="/v1/api/users/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public ResponseRecord<User> delete(
 			@PathVariable("id") Long id){
 		ResponseRecord<User> responseModel = new ResponseRecord<User>();
@@ -159,7 +156,7 @@ public class RestUserController {
 	}
 	
 	
-	@RequestMapping(value="/v1/api/users", method = RequestMethod.GET)
+	@RequestMapping(value="/all", method = RequestMethod.GET)
 	@ApiOperation("TODO: TO LIST ALL USERS")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "name", dataType = "string", paramType = "query", defaultValue="",
@@ -191,7 +188,7 @@ public class RestUserController {
 	
 	
 	@ApiOperation("TODO: TO LIST USER BY ID")
-	@RequestMapping(value="/v1/api/users/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value="/{userId}", method = RequestMethod.GET)
 	public ResponseRecord<User> getAllUserById(@PathVariable("userId") Long userId){
 		ResponseRecord<User> response = new ResponseRecord<User>();
 
