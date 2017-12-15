@@ -161,7 +161,7 @@ public class UserRepositoryImpl implements UserRepository{
 
 		return jdbcTemplate.queryForObject(sql, 
 				new Object[]{
-						user.getEmail(),
+						user.getEmail()
 		},
 				new RowMapper<User>(){
 			@Override

@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class WishListForm {
 
 	public static class SaveWishList{
-		@JsonProperty("USER_ID")
+		@JsonProperty("user_id")
 		private Long userId;
-		@JsonProperty("ARTICLE_ID")
+		@JsonProperty("article_id")
 		private Long articleId;
 		
 		public Long getUserId() {

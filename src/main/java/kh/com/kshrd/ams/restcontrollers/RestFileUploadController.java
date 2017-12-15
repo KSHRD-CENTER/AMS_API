@@ -27,18 +27,18 @@ public class RestFileUploadController {
 	@ApiOperation("TODO: TO UPLOAD FILE")
 	@RequestMapping(value="/single", method = RequestMethod.POST)
 	public ResponseRecord<String> signup(
-			@RequestParam("FILE") CommonsMultipartFile file, 
+			@RequestParam("file") CommonsMultipartFile file, 
 			HttpServletRequest request){
 		ResponseRecord<String> responseModel = new ResponseRecord<String>();
 		try {
 			
 			String url = uploadService.uploadMultipart(file, request);
 			if(url!=null){
-				responseModel.setCode("0000");
+				responseModel.setCode(2222);
 				responseModel.setMessage("YOU HAVE BEEN UPLOAD FILE SUCCESSFULLY.");
 				responseModel.setData(url);
 			}else{
-				responseModel.setCode("9999");
+				responseModel.setCode(9999);
 				responseModel.setMessage("YOU HAVE UPLOAD FILE FAILURE.");
 			}
 		}catch(Exception ex){

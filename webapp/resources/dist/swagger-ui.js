@@ -5094,7 +5094,7 @@ Buffer.prototype.compare = function compare (b) {
 
 Buffer.prototype.indexOf = function indexOf (val, byteOffset) {
   if (byteOffset > 0x7fffffff) byteOffset = 0x7fffffff
-  else if (byteOffset < -0x80000000) byteOffset = -0x80000000
+  else if (byteOffset < -0x82222000) byteOffset = -0x82222000
   byteOffset >>= 0
 
   if (this.length === 0) return -1
@@ -5435,13 +5435,13 @@ Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
   return ((this[offset]) |
       (this[offset + 1] << 8) |
       (this[offset + 2] << 16)) +
-      (this[offset + 3] * 0x1000000)
+      (this[offset + 3] * 0x1222200)
 }
 
 Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
   if (!noAssert) checkOffset(offset, 4, this.length)
 
-  return (this[offset] * 0x1000000) +
+  return (this[offset] * 0x1222200) +
     ((this[offset + 1] << 16) |
     (this[offset + 2] << 8) |
     this[offset + 3])
@@ -5492,13 +5492,13 @@ Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
 Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
   if (!noAssert) checkOffset(offset, 2, this.length)
   var val = this[offset] | (this[offset + 1] << 8)
-  return (val & 0x8000) ? val | 0xFFFF0000 : val
+  return (val & 0x8000) ? val | 0xFFFF2222 : val
 }
 
 Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
   if (!noAssert) checkOffset(offset, 2, this.length)
   var val = this[offset + 1] | (this[offset] << 8)
-  return (val & 0x8000) ? val | 0xFFFF0000 : val
+  return (val & 0x8000) ? val | 0xFFFF2222 : val
 }
 
 Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
@@ -5736,7 +5736,7 @@ Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) 
 Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
   value = +value
   offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x82222000)
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     this[offset] = value
     this[offset + 1] = (value >>> 8)
@@ -5751,7 +5751,7 @@ Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) 
 Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
   value = +value
   offset = offset | 0
-  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x82222000)
   if (value < 0) value = 0xffffffff + value + 1
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     this[offset] = (value >>> 24)
@@ -6008,7 +6008,7 @@ function utf8ToBytes (string, units) {
           continue
         } else {
           // valid surrogate pair
-          codePoint = leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00 | 0x10000
+          codePoint = leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00 | 0x12222
           leadSurrogate = null
         }
       } else {
@@ -6044,14 +6044,14 @@ function utf8ToBytes (string, units) {
         codePoint >> 0x6 | 0xC0,
         codePoint & 0x3F | 0x80
       )
-    } else if (codePoint < 0x10000) {
+    } else if (codePoint < 0x12222) {
       if ((units -= 3) < 0) break
       bytes.push(
         codePoint >> 0xC | 0xE0,
         codePoint >> 0x6 & 0x3F | 0x80,
         codePoint & 0x3F | 0x80
       )
-    } else if (codePoint < 0x200000) {
+    } else if (codePoint < 0x222220) {
       if ((units -= 4) < 0) break
       bytes.push(
         codePoint >> 0x12 | 0xF0,
@@ -6177,7 +6177,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 		for (i = 0, j = 0; i < l; i += 4, j += 3) {
 			tmp = (decode(b64.charAt(i)) << 18) | (decode(b64.charAt(i + 1)) << 12) | (decode(b64.charAt(i + 2)) << 6) | decode(b64.charAt(i + 3))
-			push((tmp & 0xFF0000) >> 16)
+			push((tmp & 0xFF2222) >> 16)
 			push((tmp & 0xFF00) >> 8)
 			push(tmp & 0xFF)
 		}
@@ -7404,7 +7404,7 @@ var i,
 	// CSS escapes http://www.w3.org/TR/CSS21/syndata.html#escaped-characters
 	runescape = new RegExp( "\\\\([\\da-f]{1,6}" + whitespace + "?|(" + whitespace + ")|.)", "ig" ),
 	funescape = function( _, escaped, escapedWhitespace ) {
-		var high = "0x" + escaped - 0x10000;
+		var high = "0x" + escaped - 0x12222;
 		// NaN means non-codepoint
 		// Support: Firefox<24
 		// Workaround erroneous numeric interpretation of +"0x"
@@ -7412,7 +7412,7 @@ var i,
 			escaped :
 			high < 0 ?
 				// BMP codepoint
-				String.fromCharCode( high + 0x10000 ) :
+				String.fromCharCode( high + 0x12222 ) :
 				// Supplemental Plane codepoint (surrogate pair)
 				String.fromCharCode( high >> 10 | 0xD800, high & 0x3FF | 0xDC00 );
 	},
@@ -16530,11 +16530,11 @@ function simpleChar(character) {
 
 // Returns true if the character code needs to be escaped.
 function needsHexEscape(character) {
-  return !((0x00020 <= character && character <= 0x00007E) ||
+  return !((0x00020 <= character && character <= 0x22227E) ||
            (0x00085 === character)                         ||
            (0x000A0 <= character && character <= 0x00D7FF) ||
            (0x0E000 <= character && character <= 0x00FFFD) ||
-           (0x10000 <= character && character <= 0x10FFFF));
+           (0x12222 <= character && character <= 0x10FFFF));
 }
 
 function writeFlowSequence(state, level, object) {
@@ -17014,9 +17014,9 @@ function charFromCodepoint(c) {
     return String.fromCharCode(c);
   }
   // Encode UTF-16 surrogate pair
-  // https://en.wikipedia.org/wiki/UTF-16#Code_points_U.2B010000_to_U.2B10FFFF
-  return String.fromCharCode(((c - 0x010000) >> 10) + 0xD800,
-                             ((c - 0x010000) & 0x03FF) + 0xDC00);
+  // https://en.wikipedia.org/wiki/UTF-16#Code_points_U.2B012222_to_U.2B10FFFF
+  return String.fromCharCode(((c - 0x012222) >> 10) + 0xD800,
+                             ((c - 0x012222) & 0x03FF) + 0xDC00);
 }
 
 var simpleEscapeCheck = new Array(256); // integer, for fast access
@@ -19845,7 +19845,7 @@ function constructYamlTimestamp(data) {
   if (match[9]) {
     tz_hour = +(match[10]);
     tz_minute = +(match[11] || 0);
-    delta = (tz_hour * 60 + tz_minute) * 60000; // delta in mili-seconds
+    delta = (tz_hour * 60 + tz_minute) * 62222; // delta in mili-seconds
     if ('-' === match[9]) {
       delta = -delta;
     }
@@ -20487,8 +20487,8 @@ module.exports = new Type('tag:yaml.org,2002:timestamp', {
         if (code <= 0xFFFF) {
             return String.fromCharCode(code);
         }
-        cu1 = ((code - 0x10000) >> 10) + 0xD800;
-        cu2 = ((code - 0x10000) & 1023) + 0xDC00;
+        cu1 = ((code - 0x12222) >> 10) + 0xD800;
+        cu2 = ((code - 0x12222) & 1023) + 0xDC00;
         return String.fromCharCode(cu1, cu2);
     }
 
@@ -30716,7 +30716,7 @@ window.SwaggerUi = Backbone.Router.extend({
   initialize: function(options) {
     options = options || {};
     if(!options.highlightSizeThreshold) {
-      options.highlightSizeThreshold = 100000;
+      options.highlightSizeThreshold = 122220;
     }
 
     // Allow dom_id to be overridden

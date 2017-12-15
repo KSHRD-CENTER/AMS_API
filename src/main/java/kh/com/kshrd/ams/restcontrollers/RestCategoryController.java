@@ -40,10 +40,10 @@ public class RestCategoryController {
 			
 			 if (list == null || list.isEmpty()) {
 
-					responseModel.setCode("9999");
+					responseModel.setCode(9999);
 					responseModel.setMessage("NO DATA FOUND!");
 			}else{
-				responseModel.setCode("0000");
+				responseModel.setCode(2222);
 				responseModel.setMessage("YOU HAVE BEEN FIND ALL CATEGORIES SUCCESSFULLY.");
 				responseModel.setData(list);
 			}
@@ -62,10 +62,10 @@ public class RestCategoryController {
 			List<Article> list = articleService.findAllArticlesByCategoryId(id, pagination);
 			
 			if (list == null || list.isEmpty()) {
-				response.setCode("9999");
+				response.setCode(9999);
 				response.setMessage("NO DATA FOUND!");
 			}else{
-				response.setCode("0000");
+				response.setCode(2222);
 				response.setMessage("YOU HAVE BEEN FIND ALL CATEGORIES SUCCESSFULLY.");
 				response.setData(list);
 				response.setPagination(pagination);

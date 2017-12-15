@@ -295,7 +295,7 @@
   padding-bottom: 5px;
 }
 .swagger-section .swagger-ui-wrap .message-fail {
-  color: #cc0000;
+  color: #cc2222;
 }
 .swagger-section .swagger-ui-wrap .info_url {
   padding-bottom: 5px;
@@ -805,7 +805,7 @@
 }
 .swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation div.content form input[type='text'].error {
   outline: 2px solid black;
-  outline-color: #cc0000;
+  outline-color: #cc2222;
 }
 .swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation div.content form select[name='parameterContentType'] {
   max-width: 300px;
@@ -1105,7 +1105,7 @@
   text-align: center;
 }
 .swagger-section .api-popup-dialog {
-  z-index: 10000;
+  z-index: 12222;
   position: absolute;
   width: 500px;
   background: #FFF;

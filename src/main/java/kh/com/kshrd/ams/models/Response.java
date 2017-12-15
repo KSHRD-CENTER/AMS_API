@@ -3,21 +3,21 @@ package kh.com.kshrd.ams.models;
 
 public class Response {
 
-	public String code;
+	public int code;
 
 	public String message;
 	
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 	public String getMessage() {
 		if("".equals(this.message)){
-			if("0000".equals(this.code)){
+			if(2222 == this.code){
 				this.message = "SUCCESSFULLY.";
-			}else if("9999".equals(this.code)){
+			}else if(9999 == this.code){
 				this.message = "FAILURE.";
 			}			
 		}

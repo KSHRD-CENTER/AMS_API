@@ -54,12 +54,12 @@ public class RestArticleController {
 		try {
 			List<Article> list = articleService.findAllArticles(filter, pagination);
 			if (list != null) {
-				responseModel.setCode("0000");
+				responseModel.setCode(2222);
 				responseModel.setMessage("YOU HAVE BEEN FIND ALL ARTICLES SUCCESSFULLY.");
 				responseModel.setData(list);
 				responseModel.setPagination(pagination);
 			} else {
-				responseModel.setCode("9999");
+				responseModel.setCode(9999);
 				responseModel.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A RESOURCE ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
 			}
 		} catch (Exception e) {
@@ -75,11 +75,11 @@ public class RestArticleController {
 		try {
 			Article article = articleService.findArticleById(id);
 			if (article != null) {
-				responseModel.setCode("0000");
+				responseModel.setCode(2222);
 				responseModel.setMessage("YOU HAVE BEEN FIND A ARTICLE SUCCESSFULLY.");
 				responseModel.setData(article);
 			} else {
-				responseModel.setCode("9999");
+				responseModel.setCode(9999);
 				responseModel.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A RESOURCE ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
 			}
 
@@ -97,7 +97,7 @@ public class RestArticleController {
 
 			Article article = new Article();
 			User user = new User();
-			user.setId(form.getAuthor());
+			user.setId(form.getAuthorId());
 			article.setAuthor(user);
 			article.setTitle(form.getTitle());
 			article.setDescription(form.getDescription());
@@ -112,11 +112,11 @@ public class RestArticleController {
 
 
 			if (result != null) {
-				responseModel.setCode("0000");
+				responseModel.setCode(2222);
 				responseModel.setMessage("YOU HAVE BEEN ADD NEW ARTICLE SUCCESSFULLY.");
 				responseModel.setData(result);
 			} else {
-				responseModel.setCode("9999");
+				responseModel.setCode(9999);
 				responseModel.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A RESOURCE ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
 			}
 		} catch (Exception e) {
@@ -133,7 +133,7 @@ public class RestArticleController {
 			Article article = new Article();
 			article.setId(id);
 			User user = new User();
-			user.setId(form.getAuthor());
+			user.setId(form.getAuthorId());
 			article.setAuthor(user);
 			article.setTitle(form.getTitle());
 			article.setDescription(form.getDescription());
@@ -146,11 +146,11 @@ public class RestArticleController {
 
 			Article result = articleService.updateArticle(article);
 			if (result != null) {
-				responseModel.setCode("0000");
+				responseModel.setCode(2222);
 				responseModel.setMessage("YOU HAVE BEEN UPDATED THE ARTICLE SUCCESSFULLY.");
 				responseModel.setData(result);
 			} else {
-				responseModel.setCode("9999");
+				responseModel.setCode(9999);
 				responseModel.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A RESOURCE ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
 			}
 		} catch (Exception e) {
@@ -167,11 +167,11 @@ public class RestArticleController {
 			Article article = new Article();
 			article = articleService.deleteArticle(id);
 			if(article!=null){
-				responseModel.setCode("0000");
+				responseModel.setCode(2222);
 				responseModel.setMessage("ARTICLE HAVE BEEN DELETE SUCCESSFULLY.");
 				responseModel.setData(article);
 			}else{
-				responseModel.setCode("9999");
+				responseModel.setCode(9999);
 				responseModel.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A RESOURCE ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
 			}
 		}catch(Exception ex){

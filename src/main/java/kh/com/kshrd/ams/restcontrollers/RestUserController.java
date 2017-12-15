@@ -66,11 +66,11 @@ public class RestUserController {
 			
 			user = userService.signUp(user);
 			if(user!=null){
-				responseModel.setCode("0000");
+				responseModel.setCode(2222);
 				responseModel.setMessage("YOU HAVE BEEN SIGNED UP SUCCESSFULLY.");
 				responseModel.setData(user);
 			}else{
-				responseModel.setCode("9999");
+				responseModel.setCode(9999);
 				responseModel.setMessage("YOU HAVE BEEN SIGNED UP FAILURE.");
 			}
 		}catch(Exception ex){
@@ -86,13 +86,14 @@ public class RestUserController {
 		try {
 			User user = new User();
 			user.setEmail(form.getEmail());
+			System.out.println("-------------" + form.toString());
 			user.setPassword(form.getPassword());
 			User userLogined = userService.signIn(user);
 			if(userLogined==null){
-				response.setCode("9999");
+				response.setCode(9999);
 				response.setMessage("YOU HAVE BEEN FIALED WHEN LOGIN PLEASE TRY AGAIN.");
 			}else{
-				response.setCode("0000");
+				response.setCode(2222);
 				response.setMessage("YOU HAVE BEEN SIGNED IN SUCCESSFULLY.");
 				response.setData(userLogined);
 			}
@@ -120,11 +121,11 @@ public class RestUserController {
 			user.setImageUrl(uploadService.uploadMultipart(file, request));
 			user = userService.updateProfile(user);
 			if(user!=null){
-				responseModel.setCode("0000");
+				responseModel.setCode(2222);
 				responseModel.setMessage("YOU HAVE BEEN SIGNED UP SUCCESSFULLY.");
 				responseModel.setData(user);
 			}else{
-				responseModel.setCode("9999");
+				responseModel.setCode(9999);
 				responseModel.setMessage("YOU HAVE BEEN SIGNED UP FAILURE.");
 			}
 		}catch(Exception ex){
@@ -142,11 +143,11 @@ public class RestUserController {
 			User user = new User();
 			user = userService.deleteUserById(id);
 			if(user!=null){
-				responseModel.setCode("0000");
+				responseModel.setCode(2222);
 				responseModel.setMessage("USER HAVE BEEN DELETE SUCCESSFULLY.");
 				responseModel.setData(user);
 			}else{
-				responseModel.setCode("9999");
+				responseModel.setCode(9999);
 				responseModel.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A RESOURCE ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
 			}
 		}catch(Exception ex){
@@ -171,10 +172,10 @@ public class RestUserController {
 		try{
 			List<User> userList = userService.findAllUsers(filter, pagination);
 			if (userList == null || userList.isEmpty()) {
-				response.setCode("0000");
+				response.setCode(2222);
 				response.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A RESOURCE ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
 			} else {
-				response.setCode("0000");
+				response.setCode(2222);
 				response.setMessage("RECORDS FOUND.");
 				response.setData(userList);
 				response.setPagination(pagination);
@@ -197,10 +198,10 @@ public class RestUserController {
 			user.setId(userId);
 			User foundUser = userService.findUserById(user);
 			if(foundUser==null){
-				response.setCode("9999");
+				response.setCode(9999);
 				response.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A USER ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
 			}else{
-				response.setCode("0000");
+				response.setCode(2222);
 				response.setMessage("USER FOUND.");
 				response.setData(foundUser);
 			}
@@ -218,18 +219,18 @@ public class RestUserController {
 	    @ApiImplicitParam(name = "limit", dataType = "integer", paramType = "query", defaultValue="15",
 	            value = "Number of records per page."),
 	})
-	@RequestMapping(value="/v1/api/users/{userId}/wishlists", method = RequestMethod.GET)
+	@RequestMapping(value="/v1/api/user/{userId}/wishlists", method = RequestMethod.GET)
 	public ResponseList<WishList> findAllWishListByUserId(@PathVariable("userId") Long userId, @ApiIgnore Pagination pagination){
 		ResponseList<WishList> response = new ResponseList<WishList>();
 		try{
 			
 			List<WishList> findAllWishLists = wishListService.findAllWishLists(userId, pagination);
 			if(findAllWishLists == null || findAllWishLists.isEmpty()){
-				response.setCode("9999");
+				response.setCode(9999);
 				response.setMessage("THE REQUESTED OPERATION FAILED BECAUSE A USER ASSOCIATED WITH THE REQUEST COULD NOT BE FOUND.");
 			}else{
 				response.setMessage("RECORD FOUND.");
-				response.setCode("0000");
+				response.setCode(2222);
 				response.setData(findAllWishLists);
 			}
 		}catch(Exception ex){

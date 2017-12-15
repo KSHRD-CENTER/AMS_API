@@ -43,10 +43,10 @@ public class RestWishListController {
 			wishList.setUserId(saveWishList.getUserId());
 			wishList = wishListService.saveArticleToWishList(wishList);
 			if(wishList==null){
-				response.setCode("9999");
+				response.setCode(9999);
 				response.setMessage("FAILURE WHEN SAVE LIST.");
 			}else{
-				response.setCode("0000");
+				response.setCode(2222);
 				response.setMessage("YOU HAVE BEEN SAVE SUCCESSFULLY.");
 				response.setData(wishList);				
 			}
@@ -70,10 +70,10 @@ public class RestWishListController {
 			List<WishList> list  = wishListService.findAllWishLists(userId, pagination);
 			
 			if (list == null || list.isEmpty()) {
-				response.setCode("9999");
+				response.setCode(9999);
 				response.setMessage("NO DATA FOUND.");
 			}else {
-				response.setCode("0000");
+				response.setCode(2222);
 				response.setMessage("YOU HAVE BEEN FOUND SUCCESSFULLY.");
 				response.setData(list);
 			}
@@ -90,11 +90,11 @@ public class RestWishListController {
 		try{
 			WishList wishList = wishListService.removeArticleFromWishList(id);
 			if (wishList != null) {
-				response.setCode("0000");
+				response.setCode(2222);
 				response.setMessage("YOU HAVE BEEN REMOVE SUCCESSFULLY.");
 				response.setData(wishList);
 			}else{
-				response.setCode("9999");
+				response.setCode(9999);
 				response.setMessage("FAILURE WHEN REMOVE SAVE LIST.");
 			}
 		}catch(Exception ex){

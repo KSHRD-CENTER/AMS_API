@@ -7,18 +7,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserForm {
 	
-	@JsonProperty("EMAIL")
 	private String email;
-	@JsonProperty("NAME")
+
 	private String name;
-	@JsonProperty("PASSWORD")
+
 	private String password;
-	@JsonProperty("GENDER")
+	
 	private String gender;
-	@JsonProperty("TELEPHONE")
+
 	private String telephone;
-	@JsonProperty("PHOTO")
+	
 	private CommonsMultipartFile photo;
+	
 	public String getEmail() {
 		return email;
 	}
@@ -63,9 +63,9 @@ public class UserForm {
 	}
 	
 	public static class SignInForm{
-		@JsonProperty("EMAIL")
+		
 		private String email;
-		@JsonProperty("PASSWORD")
+
 		private String password;
 		public String getEmail() {
 			return email;

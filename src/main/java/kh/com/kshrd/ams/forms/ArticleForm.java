@@ -5,17 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ArticleForm {
 	
 	public static class InsertArticleForm{
-		@JsonProperty("TITLE")
+		
 		private String title;
-		@JsonProperty("DESCRIPTION")
+		
 		private String description;
-		@JsonProperty("AUTHOR")
-		private Long author;
-		@JsonProperty("CATEGORY_ID")
+		
+		@JsonProperty("author_id")
+		private Long authorId;
+		
+		@JsonProperty("category_id")
 		private Long categoryId;
-		@JsonProperty("STATUS")
+		
 		private String status;
-		@JsonProperty("IMAGE")
+		
 		private String image;
 		
 		public String getTitle() {
@@ -30,11 +32,11 @@ public class ArticleForm {
 		public void setDescription(String description) {
 			this.description = description;
 		}
-		public Long getAuthor() {
-			return author;
+		public Long getAuthorId() {
+			return authorId;
 		}
-		public void setAuthor(Long author) {
-			this.author = author;
+		public void setAuthorId(Long authorId) {
+			this.authorId = authorId;
 		}
 		public Long getCategoryId() {
 			return categoryId;
@@ -58,17 +60,19 @@ public class ArticleForm {
 	}
 	
 	public static class UpdateArticleForm{
-		@JsonProperty("TITLE")
+		
 		private String title;
-		@JsonProperty("DESCRIPTION")
+		
 		private String description;
-		@JsonProperty("AUTHOR")
-		private Long author;
-		@JsonProperty("CATEGORY_ID")
+		
+		@JsonProperty("author_id")
+		private Long authorId;
+		
+		@JsonProperty("category_id")
 		private Long categoryId;
-		@JsonProperty("STATUS")
+		
 		private String status;
-		@JsonProperty("IMAGE")
+		
 		private String image;
 		
 		public String getTitle() {
@@ -83,11 +87,11 @@ public class ArticleForm {
 		public void setDescription(String description) {
 			this.description = description;
 		}
-		public Long getAuthor() {
-			return author;
+		public Long getAuthorId() {
+			return authorId;
 		}
-		public void setAuthor(Long author) {
-			this.author = author;
+		public void setAuthorId(Long authorId) {
+			this.authorId = authorId;
 		}
 		public Long getCategoryId() {
 			return categoryId;
@@ -110,9 +114,9 @@ public class ArticleForm {
 		
 		@Override
 		public String toString() {
-			return "UpdateArticleForm [title=" + title + ", description=" + description + ", author=" + author
+			return "UpdateArticleForm [title=" + title + ", description=" + description + ", authorId=" + authorId
 					+ ", categoryId=" + categoryId + ", status=" + status + ", image=" + image + ", getTitle()="
-					+ getTitle() + ", getDescription()=" + getDescription() + ", getAuthor()=" + getAuthor()
+					+ getTitle() + ", getDescription()=" + getDescription() + ", getAuthor()=" + getAuthorId()
 					+ ", getCategoryId()=" + getCategoryId() + ", getStatus()=" + getStatus() + ", getImage()="
 					+ getImage() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
 					+ super.toString() + "]";
