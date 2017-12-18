@@ -181,6 +181,33 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 	
 	@Override
+	public User signInFacebook(User user) {
+		Long id = jdbcTemplate.queryForObject("SELECT nextval('articles_id_seq')", Long.class);
+		int result = jdbcTemplate.update("INSERT INTO users("
+				+ "id, "
+				+ "name, "
+				+ "password, "
+				+ "email, "
+				+ "gender, "
+				+ "status, "
+				+ "image_url) "
+				+ "VALUES(?, ?, ?, ?, ?, '1', ?)"
+				, new Object[]{
+						id,
+						user.getName(),
+						user.getPassword(),
+						user.getEmail(),
+						user.getGender(),
+						user.getImageUrl()
+				});
+		if (result > 0) {
+			return this.findOne(id);
+		}
+		return null;
+	}
+	
+	
+	@Override
 	public Long count(UserFilter filter) {
 		String sql =  "SELECT COUNT(A.id) "
 					+ "FROM users A "

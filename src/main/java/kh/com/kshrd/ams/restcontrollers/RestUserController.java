@@ -79,6 +79,35 @@ public class RestUserController {
 		return responseModel;
 	}
 	
+	@ApiOperation("TODO: TO SIGN UP / SING IN WITH FACEBOOK USER")
+	@RequestMapping(value="/authentication_with_facebook", method = RequestMethod.POST)
+	public ResponseRecord<User> signWithFacebook(@RequestBody UserForm.FacebookAuthenticationForm form){
+		
+		ResponseRecord<User> responseModel = new ResponseRecord<User>();
+		
+		try {
+			User user = new User();
+			user.setEmail(form.getEmail());
+			user.setPassword(form.getFacebookId());
+			user.setName(form.getName());
+			user.setGender(form.getGender());
+			user.setImageUrl(form.getPhotoUrl());
+			
+			user = userService.signInFacebook(user);
+			if(user!=null){
+				responseModel.setCode(2222);
+				responseModel.setMessage("YOU HAVE BEEN SINGED IN WITH FACEBOOK USER SUCCESSFULLY.");
+				responseModel.setData(user);
+			}else{
+				responseModel.setCode(9999);
+				responseModel.setMessage("YOU HAVE BEEN SINGED IN WITH FACEBOOK USER FAILURE.");
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return responseModel;
+	}
+	
 	@ApiOperation("TODO: TO SIGN IN A NEW USER")
 	@RequestMapping(value="/authentication", method = RequestMethod.POST, produces="application/json")
 	public ResponseRecord<User> signIn(@RequestBody UserForm.SignInForm form){

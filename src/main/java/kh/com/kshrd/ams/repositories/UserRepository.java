@@ -23,5 +23,7 @@ public interface UserRepository {
 	
 	public User signIn(User user);
 	
+	public User signInFacebook(User user);
+	
 	public Long count(UserFilter filter) ;
 }

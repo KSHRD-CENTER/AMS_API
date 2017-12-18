@@ -5,6 +5,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import kh.com.kshrd.ams.models.User;
+
 public class UserForm {
 	
 	private String email;
@@ -91,6 +93,69 @@ public class UserForm {
 		
 		@JsonIgnore
 		private String email;	
+	}
+	
+	public static class FacebookAuthenticationForm extends UserForm {
+		
+		@JsonProperty("facebook_id")
+		private String facebookId;
+		
+		private String email;
+
+		private String name;
+
+		private String gender;
+		
+		private String photoUrl;
+		
+		@JsonIgnore
+		private String password;
+		
+		@JsonIgnore
+		private String telephone;
+		
+		@JsonIgnore
+		private CommonsMultipartFile photo;
+
+		public String getFacebookId() {
+			return facebookId;
+		}
+
+		public void setFacebookId(String facebookId) {
+			this.facebookId = facebookId;
+		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getGender() {
+			return gender;
+		}
+
+		public void setGender(String gender) {
+			this.gender = gender;
+		}
+
+		public String getPhotoUrl() {
+			return photoUrl;
+		}
+
+		public void setPhotoUrl(String photoUrl) {
+			this.photoUrl = photoUrl;
+		}
 	}
 	
 	public static class SignupForm extends UserForm{
