@@ -30,13 +30,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		//MAYBE COME FROM SECURITY HOUY DISABLE IT SIN TOV
-		// OK SO DISABLE IT MEAN NO NEED HEADER KEY  YES CLOSE SIN TOV OK BYE BYE SAK TEST
-		//http.antMatcher("/v1/api/**").authorizeRequests().anyRequest().hasRole("API");
-//		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
-		//http.authorizeRequests().anyRequest().authenticated();
-		http.authorizeRequests().anyRequest().permitAll();
-		//http.httpBasic().authenticationEntryPoint(authenticationEntryPoint);
+		// Add Authentication
+		http.antMatcher("/v1/api/**").authorizeRequests().anyRequest().hasRole("API");
+		//http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+		http.authorizeRequests().anyRequest().authenticated();
+		http.httpBasic().authenticationEntryPoint(authenticationEntryPoint);
+		
+		// Remove Authentication
+		// http.authorizeRequests().anyRequest().permitAll();		
 		
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

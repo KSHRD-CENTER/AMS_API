@@ -9,9 +9,9 @@ public class CustomGenericException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 2223401815627927627L;
 
-	@JsonProperty("CODE")
+	@JsonProperty("code")
 	private String code;
-	@JsonProperty("MESSAGE")
+	@JsonProperty("message")
 	private String message;
 	
 	public CustomGenericException(String code, String message) {
